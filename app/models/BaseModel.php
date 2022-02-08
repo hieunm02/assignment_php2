@@ -194,6 +194,14 @@ class BaseModel
 		return $sttm->fetch(PDO::FETCH_OBJ);
 	 }
 
+	 public static function studentQuiz(){
+		 $model = new static();
+		 $query = "SELECT s.*, u.`name` as student_name, q.`name` as quiz_name FROM $model->tableName s INNER JOIN users u ON s.student_id = u.id INNER JOIN quizs q ON s.quiz_id = q.id";
+		 $sttm = $model->getConnect()->prepare($query);
+		 $sttm->execute();
+		 return $sttm->fetchAll(PDO::FETCH_CLASS, get_class($model));
+	}
+
 }
 
 

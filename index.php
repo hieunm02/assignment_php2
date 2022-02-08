@@ -9,6 +9,7 @@ use App\Controllers\HomeController;
 use App\Controllers\LoginController;
 use App\Controllers\QuestionController;
 use App\Controllers\QuizController;
+use App\Controllers\StudentQuizController;
 use App\Controllers\SubjectController;
 use App\Controllers\UserController;
 use App\Models\Quiz;
@@ -155,18 +156,22 @@ switch ($url) {
         $ctr = new UserController();
         $ctr->saveUpdate();
         break;
-        case 'user/profile-edit':
-            $ctr = new UserController();
-            $ctr->profileEdit();
-            break;
+    case 'user/profile-edit':
+        $ctr = new UserController();
+        $ctr->profileEdit();
+        break;
     case 'user/xoa':
         $ctr = new UserController();
         $ctr->remove();
         break;
-        case 'quiz/result':
-            $ctr = new QuizController();
-            $ctr->endQuiz();
-            break;
+    case 'quiz/result':
+        $ctr = new QuizController();
+        $ctr->endQuiz();
+        break;
+    case 'studentquiz':
+        $ctr = new StudentQuizController();
+        $ctr->index();
+        break;
     default:
         echo "Đường dẫn bạn đang truy cập chưa được cho phép";
         break;
