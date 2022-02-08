@@ -28,12 +28,12 @@
         <nav class="nav">
             <div> <a href="<?= $ADMIN_URL ?>" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">Dashboard</span> </a>
                 <div class="nav_list">
-                    <a href="http://localhost/WEB3014/asm1/mon-hoc" class="nav_link">
+                    <a href="<?= BASE_URL ?>mon-hoc" class="nav_link">
                         <ion-icon name="grid-outline" class='bx bx-grid-alt nav_icon'></ion-icon>
                         <span class="nav_name">Môn học</span>
                     </a>
 
-                    <a href="http://localhost/WEB3014/asm1/quiz" class="nav_link">
+                    <a href="<?= BASE_URL ?>quiz" class="nav_link">
                     <ion-icon name="alert-circle-outline" class='bx bx-grid-alt nav_icon'></ion-icon>
                     <span class="nav_name">Quiz</span>
                     </a>
@@ -50,12 +50,12 @@
                     </div>
 
     
-                    <a href="http://localhost/WEB3014/asm1/question" class="nav_link">
+                    <a href="<?= BASE_URL ?>question" class="nav_link">
                     <ion-icon name="help-circle-outline" class='bx bx-grid-alt nav_icon'></ion-icon>
                         <span class="nav_name">Câu hỏi quiz</span>
                     </a>
     
-                    <a href="http://localhost/WEB3014/asm1/answer" class="nav_link">
+                    <a href="<?= BASE_URL ?>answer" class="nav_link">
                     <ion-icon name="checkmark-circle-outline" class='bx bx-grid-alt nav_icon'></ion-icon>
                         <span class="nav_name">Câu trả lời</span>
                     </a>
