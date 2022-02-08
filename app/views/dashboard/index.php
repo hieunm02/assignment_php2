@@ -86,21 +86,6 @@
         <h4>Chỉnh sửa website</h4>
         <div class="container">
             <div class="d-flex flex-wrap text-center justify-content-around">
-                <div style="width: 150px; height: 150px;" class="p-3 rounded bg-primary">
-                    <ion-icon name="build-outline" class="text-white h3"></ion-icon>
-                    <br>
-                    <a href="<?= $ADMIN_URL ?>/Banner/index.php" class="font-weight-bold text-center text-white">Tùy chỉnh banner</a>
-                </div>
-                <!--        <div style="width: 150px; height: 150px;" class="p-3 rounded bg-success">
-                    <ion-icon name="build-outline" class="text-white h3"></ion-icon>
-                    <br>
-                    <a href="<?= $ADMIN_URL ?>/Footer/index.php" class="font-weight-bold text-center text-white">Tùy chỉnh footer</a>
-                </div> -->
-                <div style="width: 150px; height: 150px;" class="p-3 rounded bg-info">
-                    <ion-icon name="build-outline" class="text-white h3"></ion-icon>
-                    <br>
-                    <a href="<?= $ADMIN_URL ?>/Logo/index.php" class="font-weight-bold text-center text-white">Tùy chỉnh logo</a>
-                </div>
 
             </div>
         </div>

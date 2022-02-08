@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="app/css/bootstrap.min.css">
 </head>
 <body>
+<?php require_once './app/views/nav/nav-admin.php' ?>
+
     <table class="table table-striped">
         <thead>
             <tr>

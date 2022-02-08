@@ -3,7 +3,7 @@
 
     class DashboardController{
         public function index(){
-            include_once './app/views/dashboard/index.php';
+            include_once './app/views/nav/nav-admin.php';
         }
     }
 

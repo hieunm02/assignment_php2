@@ -43,7 +43,7 @@
 
         <div class="card">
             <?php
-            require_once $VIEW_NAME
+            require_once './index.php';
             ?>
 
         </div>

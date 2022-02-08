@@ -12,6 +12,8 @@
 </head>
 
 <body>
+<?php require_once './app/views/nav/nav-admin.php' ?>
+
     <table class="table table-striped">
         <thead>
             <tr>
