@@ -8,7 +8,7 @@ class AnswerController{
         public function index(){
                     //chưa đăng nhập thì trả về trang đăng nhập
         if(!isset($_SESSION['login']) || empty($_SESSION['login'])){
-            header('location: http://localhost/WEB3014/asm1/login');
+            header('location: '. BASE_URL . 'login');
             die;
         }
         $answer = Answer::all();

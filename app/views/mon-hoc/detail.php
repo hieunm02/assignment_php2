@@ -35,8 +35,10 @@
                     <div class="list-quiz">
                         <ul>
                             <?php foreach($quiz as $quiz) {  ?>
-                            <li><a href="<?= BASE_URL ?>quiz/lam-bai?id=<?= $quiz['id'] ?>" class="quiz"><?= $quiz['name'] ?></a></li><br>
+                            <li><a href="<?= BASE_URL ?>quiz/lam-bai?id=<?= $quiz->id ?>" class="quiz"><?= $quiz->name ?></a> : Điểm <?= $quiz->getStudentScore() ?></li><br>
+
                             <?php } ?>
+
                         </ul>
                     </div>
                 </div>

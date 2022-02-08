@@ -33,7 +33,7 @@
                         <h2 style="text-transform: uppercase; font-family: Arial, Helvetica, sans-serif;"><?= $data['name'] ?></h2>
                     </div>
                     <div>
-                        <h2>Thời gian làm bài: <span id="time"><?= $data['duration_minutes'] ?> </span> Phút</h2>
+                        <!-- <h2>Thời gian làm bài: <span id="time"><?= $data['duration_minutes'] ?> </span> Phút</h2> -->
                     </div>
 
                     <!-- câu hỏi -->
@@ -41,6 +41,9 @@
                         <?php foreach ($startQuiz as $startQuiz) {  ?>
                             <div class="question">
                                 <div class="list-question">
+                                    <input type="hidden" name="studentId" value="<?= $_SESSION['id'] ?>" id="">
+                                    <input type="hidden" name="quizId" value="<?= $_GET['id'] ?>" id="">
+
                                     <ul>
                                         <li><a class="startQuiz" id="<?= $startQuiz['id'] ?>"><?= $startQuiz['name'] ?></a></li><br>
                                         <li>

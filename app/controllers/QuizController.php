@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\Answer;
 use App\Models\Question;
 use App\Models\Quiz;
+use App\Models\StudentQuiz;
 use App\Models\subject;
 use App\Models\User;
 
@@ -15,7 +16,7 @@ class QuizController
         //chưa đăng nhập thì trả về trang đăng nhập
 
         if (!isset($_SESSION['login']) || empty($_SESSION['login'])) {
-            header('location: http://localhost/WEB3014/asm1/login');
+            header('location: '. BASE_URL . 'login');
             die;
         }
 
@@ -108,7 +109,9 @@ class QuizController
     }
 
     public function endQuiz(){
+        $modal = new StudentQuiz();
         $user = User::all();
+       
         $role = $_SESSION['role'];
         $info = $_SESSION['name'];
         include_once './app/views/quiz/endQuiz.php';

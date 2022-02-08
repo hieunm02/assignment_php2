@@ -102,13 +102,13 @@ class BaseModel
 		$stmt->execute();
 		return $stmt->fetch();
  	}
-	 public static function subjectQuiz($id){
-		$model = new static();
-        $query = "select * from $model->tableName where subject_id = $id";
-        $stmt = $model->getConnect()->prepare($query);
-		$stmt->execute();
-		return $stmt->fetchAll();
-	 }
+	//  public static function subjectQuiz($id){
+	// 	$model = new static();
+    //     $query = "select * from $model->tableName where subject_id = $id";
+    //     $stmt = $model->getConnect()->prepare($query);
+	// 	$stmt->execute();
+	// 	return $stmt->fetchAll();
+	//  }
 
 
  	public static function destroy($id){
