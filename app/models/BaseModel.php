@@ -151,7 +151,7 @@ class BaseModel
 	public static function allQuiz(){
 		$model = new static();
 
-		$sql = "SELECT q.*, s.`name` as sub_name FROM $model->tableName q INNER JOIN subjects s ON q.subject_id = s.id ";	
+		$sql = "SELECT q.*, s.`name` as sub_name FROM $model->tableName q INNER JOIN subjects s ON q.subject_id = s.id ORDER BY q.id DESC";	
 		$sttm =$model->getConnect()->prepare($sql);
 		$sttm->execute();
 		
@@ -163,7 +163,7 @@ class BaseModel
 	public static function allQuestion(){
 		$model = new static();
 
-		$sql = "SELECT q.*, z.`name` as quiz_name FROM $model->tableName q INNER JOIN quizs z ON q.quiz_id = z.id";	
+		$sql = "SELECT q.*, z.`name` as quiz_name FROM $model->tableName q INNER JOIN quizs z ON q.quiz_id = z.id ORDER BY q.id DESC";	
 		$sttm =$model->getConnect()->prepare($sql);
 		$sttm->execute();
 		
@@ -196,7 +196,7 @@ class BaseModel
 
 	 public static function studentQuiz(){
 		 $model = new static();
-		 $query = "SELECT s.*, u.`name` as student_name, q.`name` as quiz_name FROM $model->tableName s INNER JOIN users u ON s.student_id = u.id INNER JOIN quizs q ON s.quiz_id = q.id";
+		 $query = "SELECT s.*, u.`name` as student_name, q.`name` as quiz_name FROM $model->tableName s INNER JOIN users u ON s.student_id = u.id INNER JOIN quizs q ON s.quiz_id = q.id ORDER BY s.id DESC";
 		 $sttm = $model->getConnect()->prepare($query);
 		 $sttm->execute();
 		 return $sttm->fetchAll(PDO::FETCH_CLASS, get_class($model));

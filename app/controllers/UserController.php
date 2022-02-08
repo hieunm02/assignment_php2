@@ -15,7 +15,7 @@ class UserController
             die;
         }
 
-        $user = User::all();
+        $user = User::sttOrderBy('id', false)->get();
         $id = $_SESSION['id'];
         $info = $_SESSION['name'];
         $email = $_SESSION['email'];

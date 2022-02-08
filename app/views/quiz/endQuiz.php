@@ -47,12 +47,11 @@
 
                     // $_SESSION['score'] = $score;
 
-
                     ?>
-                    <h2>Bạn làm đúng <?= $score ?>/<?= $_SESSION['countQuestion'] / 2 ?> Câu hỏi, điểm của bạn là <?= (10 / ($_SESSION['countQuestion'] / 2) * $score) ?></h2><br>
+                    <h2>Bạn làm đúng <?= $score ?>/<?= $_SESSION['countQuestion'] ?> Câu hỏi, điểm của bạn là <?= (10 / ($_SESSION['countQuestion']) * $score) ?></h2><br>
                     <a href="javascript:history.back()">Quay lại</a><br>
 
-                    <?php $_SESSION['score'] = (10 / ($_SESSION['countQuestion'] / 2) * $score); ?>
+                    <?php $_SESSION['score'] = (10 / ($_SESSION['countQuestion']) * $score); ?>
                     
                     <?php
                     $data = [

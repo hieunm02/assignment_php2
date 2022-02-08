@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Answer;
 use App\Models\Question;
 use App\Models\Quiz;
 
@@ -21,6 +22,8 @@ class QuestionController
 
     public function addForm(){
         $quiz = Quiz::all();
+        $question = Question::all();
+
         include_once './app/views/question/add-form.php';
     }
 
@@ -37,10 +40,10 @@ class QuestionController
             move_uploaded_file($imgFile['tmp_name'], 'app/img/' . $filename);
             $filename = 'img/' . $filename;
         }
-        // echo "<pre>";
-        // var_dump($_FILES['img']['name']);die;
+
         $model->image = $filename;
         $model->insert($data);
+
         header('location: ' . BASE_URL . 'question');
         die;
     }

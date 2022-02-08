@@ -36,6 +36,7 @@
                         <!-- <h2>Thời gian làm bài: <span id="time"><?= $data['duration_minutes'] ?> </span> Phút</h2> -->
                     </div>
 
+                    <?php $_SESSION['countQuestion'] = count($startQuiz) ?>
                     <!-- câu hỏi -->
                     <form action="<?= BASE_URL ?>quiz/result" method="POST">
                         <?php foreach ($startQuiz as $startQuiz) {  ?>
@@ -58,12 +59,12 @@
                                     </ul>
                                 </div>
                             </div>
+
                         <?php } ?>
                         <button type="submit" class="btn-endquiz" name="endQuiz">Hoàn thành</button><br>
 
-                        <?php $_SESSION['countQuestion'] = count($startQuiz) ?>
                     </form><br>
-                    <!-- <h2 style="margin-top: 200px;margin-left: 230px;">Điểm của bạn là <?= $_SESSION['score'] ?>/<?= count($startQuiz) / 2 ?></h2> -->
+
 
                 </div>
 

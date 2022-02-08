@@ -12,7 +12,7 @@ class SubjectController{
             header('location: '. BASE_URL . 'login');
             die;
         }
-        $subjects = Subject::all();
+        $subjects = Subject::sttOrderBy('id', false)->get();
 
 
         include_once "./app/views/mon-hoc/index.php";
