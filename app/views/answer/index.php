@@ -12,38 +12,42 @@
 </head>
 
 <body>
-    
-<?php require_once './app/views/nav/nav-admin.php' ?>
 
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Content</th>
-                <th>Question_id</th>
-                <th>is_correct</th>
-                <th>img</th>
-                <th>
-                    <a href="<?= BASE_URL . 'answer/tao-moi' ?>">Tạo mới</a>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($answer as $ans) { ?>
+    <?php require_once './app/views/nav/nav-admin.php' ?>
+
+    <div style="padding: 20px;">
+        <h2 style="margin-top: 20px;margin-bottom: 20px;">Đáp án</h2>
+
+        <table class="table table-striped">
+            <thead>
                 <tr>
-                    <td><?= $ans->id ?></td>
-                    <td><?= $ans->content ?></td>
-                    <td><?= $ans->question_id ?></td>
-                    <td><?= $ans->is_correct ?></td>
-                    <td><?= $ans->img ?></td>
-                    <td>
-                    <a href="<?= BASE_URL . 'answer/cap-nhat?id=' . $ans->id ?>">Sửa</a>
-                    <a href="<?= BASE_URL . 'answer/xoa?id=' . $ans->id ?>">Xóa</a>
-                </td>
+                    <th>ID</th>
+                    <th>Content</th>
+                    <th>Question_id</th>
+                    <th>is_correct</th>
+                    <th>img</th>
+                    <th>
+                        <a href="<?= BASE_URL . 'answer/tao-moi' ?>">Tạo mới</a>
+                    </th>
                 </tr>
-            <?php } ?>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <?php foreach ($answer as $ans) { ?>
+                    <tr>
+                        <td><?= $ans->id ?></td>
+                        <td><?= $ans->content ?></td>
+                        <td><?= $ans->question_id ?></td>
+                        <td><?= $ans->is_correct ?></td>
+                        <td><?= $ans->img ?></td>
+                        <td>
+                            <a href="<?= BASE_URL . 'answer/cap-nhat?id=' . $ans->id ?>">Sửa</a>
+                            <a href="<?= BASE_URL . 'answer/xoa?id=' . $ans->id ?>">Xóa</a>
+                        </td>
+                    </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+    </div>
 </body>
 
 </html>
