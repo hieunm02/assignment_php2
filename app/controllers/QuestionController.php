@@ -16,7 +16,18 @@ class QuestionController
             header('location: '. BASE_URL . 'login');
             die;
         }
-        $question = Question::allQuestion();
+
+        if(isset($_GET['pages'])){
+            $page = $_GET['pages'];
+        }else{
+            $page = 1;
+        }
+        $count = Question::count();
+        $row = 10;
+        $pages = ceil($count / $row);
+        $from = ($page - 1) * $row;
+
+        $question = Question::allQuestion($from,$row);
         include_once './app/views/question/index.php';
     }
 

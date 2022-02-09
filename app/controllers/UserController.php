@@ -9,13 +9,8 @@ class UserController
 {
     public function info()
     {
-        //chưa đăng nhập thì trả về trang đăng nhập
-        if (!isset($_SESSION['login']) || empty($_SESSION['login'])) {
-            header('location: '. BASE_URL . 'login');
-            die;
-        }
+        $user = User::all();
 
-        $user = User::sttOrderBy('id', false)->get();
         $id = $_SESSION['id'];
         $info = $_SESSION['name'];
         $email = $_SESSION['email'];
@@ -32,7 +27,23 @@ class UserController
 
     public function index()
     {
-        $user = User::all();
+        //chưa đăng nhập thì trả về trang đăng nhập
+        if (!isset($_SESSION['login']) || empty($_SESSION['login'])) {
+            header('location: ' . BASE_URL . 'login');
+            die;
+        }
+
+        if (isset($_GET['pages'])) {
+            $page = $_GET['pages'];
+        } else {
+            $page = 1;
+        }
+        $count = user::count();
+        $row = 10;
+        $pages = ceil($count / $row);
+        $from = ($page - 1) * $row;
+
+        $user = User::sttOrderBy('id', false)->limit($from,$row)->get();
 
         include_once './app/views/user/index.php';
     }
@@ -98,11 +109,11 @@ class UserController
             'role_id' => $_POST['role_id'],
         ];
 
-        if(empty($_FILES['avatar']) == false){
+        if (empty($_FILES['avatar']) == false) {
             $fileName = $imgFile['name'];
-            move_uploaded_file($imgFile['tmp_name'], 'app/img/' . $fileName );
+            move_uploaded_file($imgFile['tmp_name'], 'app/img/' . $fileName);
             $fileName = 'img/' . $fileName;
-        }   
+        }
 
         $model->image = $fileName;
         $model->update($data);
@@ -122,11 +133,11 @@ class UserController
             'avatar' => $_FILES['avatar']['name'],
         ];
 
-        if(empty($_FILES['avatar']) == false){
+        if (empty($_FILES['avatar']) == false) {
             $fileName = $imgFile['name'];
-            move_uploaded_file($imgFile['tmp_name'], 'app/img/' . $fileName );
+            move_uploaded_file($imgFile['tmp_name'], 'app/img/' . $fileName);
             $fileName = 'img/' . $fileName;
-        }   
+        }
 
         $model->image = $fileName;
         $model->update($data);

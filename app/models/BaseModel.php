@@ -148,10 +148,10 @@ class BaseModel
  	}
 
 
-	public static function allQuiz(){
+	public static function allQuiz($from,$row){
 		$model = new static();
 
-		$sql = "SELECT q.*, s.`name` as sub_name FROM $model->tableName q INNER JOIN subjects s ON q.subject_id = s.id ORDER BY q.id DESC";	
+		$sql = "SELECT q.*, s.`name` as sub_name FROM $model->tableName q INNER JOIN subjects s ON q.subject_id = s.id ORDER BY q.id DESC LIMIT $from,$row";	
 		$sttm =$model->getConnect()->prepare($sql);
 		$sttm->execute();
 		
@@ -160,10 +160,10 @@ class BaseModel
 	}
 
 	
-	public static function allQuestion(){
+	public static function allQuestion($from,$row){
 		$model = new static();
 
-		$sql = "SELECT q.*, z.`name` as quiz_name FROM $model->tableName q INNER JOIN quizs z ON q.quiz_id = z.id ORDER BY q.id DESC";	
+		$sql = "SELECT q.*, z.`name` as quiz_name FROM $model->tableName q INNER JOIN quizs z ON q.quiz_id = z.id ORDER BY q.id DESC LIMIT $from,$row";	
 		$sttm =$model->getConnect()->prepare($sql);
 		$sttm->execute();
 		
@@ -194,12 +194,27 @@ class BaseModel
 		return $sttm->fetch(PDO::FETCH_OBJ);
 	 }
 
-	 public static function studentQuiz(){
+	 public static function studentQuiz($from, $row){
 		 $model = new static();
-		 $query = "SELECT s.*, u.`name` as student_name, q.`name` as quiz_name FROM $model->tableName s INNER JOIN users u ON s.student_id = u.id INNER JOIN quizs q ON s.quiz_id = q.id ORDER BY s.id DESC";
+		 $query = "SELECT s.*, u.`name` as student_name, q.`name` as quiz_name FROM $model->tableName s INNER JOIN users u ON s.student_id = u.id INNER JOIN quizs q ON s.quiz_id = q.id ORDER BY s.id DESC LIMIT $from, $row";
 		 $sttm = $model->getConnect()->prepare($query);
 		 $sttm->execute();
 		 return $sttm->fetchAll(PDO::FETCH_CLASS, get_class($model));
+	}
+
+	public static function count(){
+		$model = new static();
+		$query = "SELECT * FROM $model->tableName";
+		$sttm = $model->getConnect()->prepare($query);
+		$sttm->execute();
+		// $sttm->fetchAll(PDO::FETCH_CLASS, get_class($model));
+
+		$result = array();
+		while($row = $sttm->fetchObject()){
+			$result[] = $row;
+		}
+		$count = count($result);
+		return $count;
 	}
 
 }

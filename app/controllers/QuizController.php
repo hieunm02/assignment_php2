@@ -20,7 +20,17 @@ class QuizController
             die;
         }
 
-        $quiz = Quiz::allQuiz();
+        if(isset($_GET['pages'])){
+            $page = $_GET['pages'];
+        }else{
+            $page = 1;
+        }
+        $count = Quiz::count();
+        $row = 10;
+        $pages = ceil($count / $row);
+        $from = ($page - 1) * $row;
+
+        $quiz = Quiz::allQuiz($from,$row);
         include_once './app/views/quiz/index.php';
     }
 

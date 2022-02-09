@@ -12,7 +12,18 @@ class SubjectController{
             header('location: '. BASE_URL . 'login');
             die;
         }
-        $subjects = Subject::sttOrderBy('id', false)->get();
+
+        if(isset($_GET['pages'])){
+            $page = $_GET['pages'];
+        }else{
+            $page = 1;
+        }
+        $count = Subject::count();
+        $row = 10;
+        $pages = ceil($count / $row);
+        $from = ($page - 1) * $row;
+
+        $subjects = Subject::sttOrderBy('id', false)->limit($from, $row)->get();
 
 
         include_once "./app/views/mon-hoc/index.php";

@@ -172,10 +172,10 @@ switch ($url) {
         $ctr = new StudentQuizController();
         $ctr->index();
         break;
-        case 'studentquiz/reset':
-            $ctr = new StudentQuizController();
-            $ctr->reset();
-            break;
+    case 'studentquiz/reset':
+        $ctr = new StudentQuizController();
+        $ctr->reset();
+        break;
     default:
         echo "Đường dẫn bạn đang truy cập chưa được cho phép";
         break;

@@ -14,7 +14,17 @@ class AnswerController
             header('location: ' . BASE_URL . 'login');
             die;
         }
-        $answer = Answer::sttOrderBy('id', false)->get();
+
+        if(isset($_GET['pages'])){
+            $page = $_GET['pages'];
+        }else{
+            $page = 1;
+        }
+        $count = Answer::count();
+        $row = 10;
+        $pages = ceil($count / $row);
+        $from = ($page - 1) * $row;
+        $answer = Answer::sttOrderBy('id', false)->limit($from,$row)->get();
         include_once './app/views/answer/index.php';
     }
 
