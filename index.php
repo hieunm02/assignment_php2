@@ -116,6 +116,10 @@ switch ($url) {
         $ctr = new QuestionController();
         $ctr->savaUpdate();
         break;
+    case 'question/xoa':
+        $ctr = new QuestionController();
+        $ctr->remove();
+        break;
     case 'answer':
         $ctr = new AnswerController();
         $ctr->index();

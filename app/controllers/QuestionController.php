@@ -59,6 +59,13 @@ class QuestionController
         die;
     }
 
+    public function remove()
+    {
+        $id = $_GET['id'];
+        Question::destroy($id);
+        header('location: ' . BASE_URL . 'question');
+        die;
+    }
 
     public function update(){
         $id = $_GET['id'];
