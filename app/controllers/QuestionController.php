@@ -10,13 +10,6 @@ class QuestionController
 {
     public function index()
     {
-        //chưa đăng nhập thì trả về trang đăng nhập
-
-        if (!isset($_SESSION['login']) || empty($_SESSION['login'])) {
-            header('location: '. BASE_URL . 'login');
-            die;
-        }
-
         if(isset($_GET['pages'])){
             $page = $_GET['pages'];
         }else{
@@ -59,18 +52,16 @@ class QuestionController
         die;
     }
 
-    public function remove()
+    public function remove($questionId)
     {
-        $id = $_GET['id'];
-        Question::destroy($id);
+        Question::destroy($questionId);
         header('location: ' . BASE_URL . 'question');
         die;
     }
 
-    public function update(){
-        $id = $_GET['id'];
+    public function update($questionId){
         $quiz = Quiz::all();
-        $data = Question::findById($id);
+        $data = Question::findById($questionId);
         include_once './app/views/question/update.php';
     }
 

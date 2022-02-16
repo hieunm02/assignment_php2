@@ -7,12 +7,6 @@ use App\Models\User;
 
 class SubjectController{
     public function index(){
-        //chưa đăng nhập thì trả về trang đăng nhập
-        if(!isset($_SESSION['login']) || empty($_SESSION['login'])){
-            header('location: '. BASE_URL . 'login');
-            die;
-        }
-
         if(isset($_GET['pages'])){
             $page = $_GET['pages'];
         }else{
@@ -52,16 +46,16 @@ class SubjectController{
         die;
     }
 
-    public function remove(){
-        $id = $_GET['id'];
-        Subject::destroy($id);
+    public function remove($subjectId){
+        // $id = $_GET['id'];
+        Subject::destroy($subjectId);
         header('location: ' . BASE_URL . 'mon-hoc');
         die;
     }
 
-    public function update(){
-        $id = $_GET['id'];
-        $data = Subject::findById($id);
+    public function update($subjectId, $name){
+        // $id = $_GET['id'];
+        $data = Subject::findById($subjectId);
         include_once "./app/views/mon-hoc/update.php";
 
     }
@@ -85,15 +79,14 @@ class SubjectController{
 
     }
 
-    public function deTail(){
-        $id = $_GET['id'];
-        $data = Subject::findById($id);
-        $quiz = Quiz::where(["subject_id", '=', $id])->get();
+    public function deTail($subjectId, $name){
+        // $id = $_GET['id'];
+        $data = Subject::findById($subjectId);
+        $quiz = Quiz::where(["subject_id", '=', $subjectId])->get();
         $user = User::all();
         $role = $_SESSION['role'];
         $info = $_SESSION['name'];
 
-// var_dump();die;
         include_once "./app/views/mon-hoc/detail.php";
     }
 }

@@ -24,7 +24,7 @@
                     <div class="product__item">
                         <div class="product-header">
                             <div class="product-button">
-                                <a href="mon-hoc/chi-tiet?id=<?= $sub->id ?>"><button type="submit">Làm Quiz</button></a>
+                                <a href="mon-hoc/<?= $sub->id ?>/chi-tiet/<?= $sub->name ?>"><button type="submit">Làm Quiz</button></a>
                             </div>
                             <div class="product-image">
                                 <img src="app/img/<?= $sub->avatar ?>" alt="" class="image">

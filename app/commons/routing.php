@@ -21,45 +21,85 @@ function applyRouting($url)
     //     return "home page";
     // });
 
-    $router->get('/', [HomeController::class , 'index']);
-    $router->get('login/', [LoginController::class , 'index']);
-    $router->get('login/check-login', [LoginController::class , 'checkLogin']);
-    $router->get('logout', [LoginController::class , 'logout']);
-    $router->get('dashboard', [DashboardController::class , 'index']);
-    $router->get('mon-hoc', [SubjectController::class , 'index']);
-    $router->get('mon-hoc/tao-moi', [SubjectController::class , 'addForm']);
-    $router->get('mon-hoc/chi-tiet', [SubjectController::class , 'deTail']);
-    $router->get('mon-hoc/luu-tao-moi', [SubjectController::class , 'saveAdd']);
-    $router->get('mon-hoc/cap-nhat', [SubjectController::class , 'update']);
-    $router->get('mon-hoc/luu-cap-nhat', [SubjectController::class , 'saveUpdate']);
-    $router->get('mon-hoc/xoa', [SubjectController::class , 'remove']);
-    $router->get('quiz', [QuizController::class , 'index']);
-    $router->get('quiz/tao-moi', [QuizController::class , 'addForm']);
-    $router->get('quiz/luu-tao-moi', [QuizController::class , 'saveAdd']);
-    $router->get('quiz/cap-nhat', [QuizController::class , 'update']);
-    $router->get('quiz/luu-cap-nhat', [QuizController::class , 'saveUpdate']);
-    $router->get('quiz/xoa', [QuizController::class , 'remove']);
-    $router->get('quiz/lam-bai', [QuizController::class , 'starQuiz']);
-    $router->get('question', [QuestionController::class , 'index']);
-    $router->get('question/tao-moi', [QuestionController::class , 'addForm']);
-    $router->get('question/luu-tao-moi', [QuestionController::class , 'saveAdd']);
-    $router->get('question/cap-nhat', [QuestionController::class , 'question/cap-nhat']);
-    $router->get('question/luu-cap-nhat', [QuestionController::class , 'savaUpdate']);
-    $router->get('question/xoa', [QuestionController::class , 'remove']);
-    $router->get('answer', [AnswerController::class , 'index']);
-    $router->get('answer/tao-moi', [AnswerController::class , 'addForm']);
-    $router->get('answer/luu-tao-moi', [AnswerController::class , 'saveAdd']);
-    $router->get('admin', [DashboardController::class , 'index']);
-    $router->get('user', [UserController::class , 'index']);
-    $router->get('user/info', [UserController::class , 'info']);
-    $router->get('user/tao-moi', [UserController::class , 'addForm']);
-    $router->get('user/luu-tao-moi', [UserController::class , 'saveAdd']);
-    $router->get('user/cap-nhat', [UserController::class , 'update']);
-    $router->get('user/profile-edit', [UserController::class , 'profileEdit']);
-    $router->get('user/xoa', [UserController::class , 'remove']);
-    $router->post('quiz/result', [QuizController::class , 'endQuiz']);
-    $router->get('studentquiz', [StudentQuizController::class , 'index']);
-    $router->get('studentquiz/reset', [StudentQuizController::class , 'reset']);
+    //check-login
+    $router->filter('check-login', function(){
+        if(!isset($_SESSION['login']) || empty($_SESSION['login'])){
+            header('location: ' . BASE_URL . 'login');
+            die;
+        }
+    });
+
+    //alone
+    $router->get('/', [HomeController::class, 'index'], ['before' => 'check-login']);
+    $router->get('logout', [LoginController::class, 'logout'], ['before' => 'check-login']);
+    $router->get('dashboard', [DashboardController::class, 'index'], ['before' => 'check-login']);
+    $router->get('admin', [DashboardController::class, 'index'], ['before' => 'check-login']);
+
+    //login
+    $router->group(['prefix' => 'login'], function ($router) {
+        $router->get('', [LoginController::class, 'index']);
+        $router->post('check-login', [LoginController::class, 'checkLogin']);
+    });
+
+    //subject
+    $router->group(['prefix' => 'mon-hoc','before' => 'check-login'], function ($router) {
+        $router->get('', [SubjectController::class, 'index']);
+        $router->get('tao-moi', [SubjectController::class, 'addForm']);
+        $router->get('{subjectId}/chi-tiet/{name}?', [SubjectController::class, 'deTail']);
+        $router->post('luu-tao-moi', [SubjectController::class, 'saveAdd']);
+        $router->get('/{subjectId}/cap-nhat/{name}?', [SubjectController::class, 'update']);
+        $router->post('luu-cap-nhat', [SubjectController::class, 'saveUpdate']);
+        $router->get('xoa/{subjectId}', [SubjectController::class, 'remove']);
+    });
+
+    //quiz
+    $router->group(['prefix' => 'quiz','before' => 'check-login'], function ($router) {
+        $router->get('', [QuizController::class, 'index']);
+        $router->get('tao-moi', [QuizController::class, 'addForm']);
+        $router->post('luu-tao-moi', [QuizController::class, 'saveAdd']);
+        $router->get('/{quizId}/cap-nhat{name}?', [QuizController::class, 'update']);
+        $router->post('luu-cap-nhat', [QuizController::class, 'saveUpdate']);
+        $router->get('xoa/{quizId}', [QuizController::class, 'remove']);
+        $router->get('{startQuizId}/lam-bai/{name}?', [QuizController::class, 'starQuiz']);
+        $router->post('result', [QuizController::class, 'endQuiz']);
+    });
+
+    //question
+    $router->group(['prefix' => 'question','before' => 'check-login'], function ($router) {
+        $router->get('', [QuestionController::class, 'index']);
+        $router->get('tao-moi', [QuestionController::class, 'addForm']);
+        $router->post('luu-tao-moi', [QuestionController::class, 'saveAdd']);
+        $router->get('{questionId}/cap-nhat/{name}?', [QuestionController::class, 'update']);
+        $router->post('luu-cap-nhat', [QuestionController::class, 'savaUpdate']);
+        $router->get('xoa/{questionId}', [QuestionController::class, 'remove']);
+    });
+
+    //answer
+    $router->group(['prefix' => 'answer','before' => 'check-login'], function ($router) {
+        $router->get('', [AnswerController::class, 'index']);
+        $router->get('tao-moi', [AnswerController::class, 'addForm']);
+        $router->post('luu-tao-moi', [AnswerController::class, 'saveAdd']);
+    });
+
+    //user
+    $router->group(['prefix' => 'user','before' => 'check-login'], function ($router) {
+        $router->get('', [UserController::class, 'index']);
+        $router->get('info', [UserController::class, 'info']);
+        $router->get('tao-moi', [UserController::class, 'addForm']);
+        $router->post('luu-tao-moi', [UserController::class, 'saveAdd']);
+        $router->get('{userId}/cap-nhat/{name}?', [UserController::class, 'update']);
+        $router->post('luu-cap-nhat', [UserController::class, 'saveUpdate']);
+        $router->post('profile-edit', [UserController::class, 'profileEdit']);
+        $router->get('xoa/{userId}', [UserController::class, 'remove']);
+    });
+
+    //studentQuiz
+    $router->group(['prefix' => 'studentquiz','before' => 'check-login'], function($router){
+        $router->get('', [StudentQuizController::class, 'index']);
+        $router->get('reset/{studentQuizId}', [StudentQuizController::class, 'reset']);
+    });
+
+    
 
 
     $dispatcher = new Dispatcher($router->getData());

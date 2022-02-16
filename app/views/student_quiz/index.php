@@ -31,7 +31,7 @@
                         <td><?= $s->student_name ?></td>
                         <td><?= $s->quiz_name ?></td>
                         <td><?= $s->score ?></td>
-                        <td><a class="btn btn-danger" onclick="return confirm('Bạn có chắc muốn reset?')" href="<?= BASE_URL . 'studentquiz/reset?id=' . $s->id ?>">Reset</a></td>
+                        <td><a class="btn btn-danger" onclick="return confirm('Bạn có chắc muốn reset?')" href="<?= BASE_URL . 'studentquiz/reset/' . $s->id ?>">Reset</a></td>
                     </tr>
                 <?php endforeach ?>
             </tbody>

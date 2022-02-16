@@ -13,13 +13,6 @@ class QuizController
 {
     public function index()
     {
-        //chưa đăng nhập thì trả về trang đăng nhập
-
-        if (!isset($_SESSION['login']) || empty($_SESSION['login'])) {
-            header('location: '. BASE_URL . 'login');
-            die;
-        }
-
         if(isset($_GET['pages'])){
             $page = $_GET['pages'];
         }else{
@@ -59,20 +52,18 @@ class QuizController
         die;
     }
 
-    public function remove()
+    public function remove($quizId)
     {
-        $id = $_GET['id'];
-        Quiz::destroy($id);
+        Quiz::destroy($quizId);
         header('location: ' . BASE_URL . 'quiz');
         die;
     }
 
-    public function update()
+    public function update($quizId)
     {
-        $id = $_GET['id'];
         $subjects = Subject::all();
 
-        $data = Quiz::findById($id);
+        $data = Quiz::findById($quizId);
         include_once "./app/views/quiz/update.php";
     }
 
@@ -94,10 +85,9 @@ class QuizController
         die;
     }
 
-    public function starQuiz()
+    public function starQuiz($startQuizId)
     {
-        $id = $_GET['id'];
-        $startQuiz = Question::startQuiz($id);
+        $startQuiz = Question::startQuiz($startQuizId);
         $question = Question::all();
         // $allQuestion = Question::all();
         // foreach ($startQuiz as $allQuestion) {
@@ -112,7 +102,7 @@ class QuizController
         // }
 
         $user = User::all();
-        $data = Quiz::findById($id);
+        $data = Quiz::findById($startQuizId);
         $role = $_SESSION['role'];
         $info = $_SESSION['name'];
         include_once './app/views/quiz/startQuiz.php';

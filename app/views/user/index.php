@@ -41,8 +41,8 @@
                         <td><?= $u->role_id ?></td>
                         <td><img src="app/img/<?= $u->avatar ?>" alt="" width="100px" height="100px"></td>
                         <td>
-                            <a class="btn btn-danger" onclick="return confirm('Bạn có chắc muốn xóa?')" href="<?= BASE_URL . 'user/xoa?id=' . $u->id ?>">Xóa</a>
-                            <a class="btn btn-primary" href="<?= BASE_URL . 'user/cap-nhat?id=' . $u->id ?>">Cập nhật</a>
+                            <a class="btn btn-danger" onclick="return confirm('Bạn có chắc muốn xóa?')" href="<?= BASE_URL . 'user/xoa/' . $u->id ?>">Xóa</a>
+                            <a class="btn btn-primary" href="<?= BASE_URL . 'user/'. $u->id .'/cap-nhat'  ?>">Cập nhật</a>
 
                         </td>
                     </tr>

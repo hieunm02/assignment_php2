@@ -8,12 +8,6 @@ class StudentQuizController
 {
     public function index()
     {
-        //chưa đăng nhập thì trả về trang đăng nhập
-        if (!isset($_SESSION['login']) || empty($_SESSION['login'])) {
-            header('location: ' . BASE_URL . 'login');
-            die;
-        }
-
         if (isset($_GET['pages'])) {
             $page = $_GET['pages'];
         } else {
@@ -27,10 +21,9 @@ class StudentQuizController
         $studentQuiz = StudentQuiz::studentQuiz($from, $row);
         include_once './app/views/student_quiz/index.php';
     }
-    public function reset()
+    public function reset($studentQuizId)
     {
-        $id = $_GET['id'];
-        StudentQuiz::destroy($id);
+        StudentQuiz::destroy($studentQuizId);
         header('location: ' . BASE_URL . 'studentquiz');
         die;
     }

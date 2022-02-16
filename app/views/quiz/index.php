@@ -44,8 +44,8 @@
                         <td><?= $quiz->status ?></td>
                         <td><?= $quiz->is_shuffle ?></td>
                         <td>
-                            <a class="btn btn-primary" href="<?= BASE_URL . 'quiz/cap-nhat?id=' . $quiz->id ?>">Sửa</a>
-                            <a class="btn btn-danger" onclick="return confirm('Bạn có chắc muốn xóa?')" href="<?= BASE_URL . 'quiz/xoa?id=' . $quiz->id ?>">Xóa</a>
+                            <a class="btn btn-primary" href="<?= BASE_URL . 'quiz/' . $quiz->id . '/cap-nhat' ?>">Sửa</a>
+                            <a class="btn btn-danger" onclick="return confirm('Bạn có chắc muốn xóa?')" href="<?= BASE_URL . 'quiz/xoa/' . $quiz->id ?>">Xóa</a>
                         </td>
                     </tr>
                 <?php endforeach ?>

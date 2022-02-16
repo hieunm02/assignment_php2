@@ -37,8 +37,8 @@
                         <td><?= $qs->quiz_name ?></td>
                         <td><img src="app/img/<?= $qs->img ?>" alt=""></td>
                         <td>
-                            <a class="btn btn-primary" href="<?= BASE_URL . 'question/cap-nhat?id=' . $qs->id ?>">Sửa</a>
-                            <a class="btn btn-danger" onclick="return confirm('Bạn có chắc muốn xóa?')" href="<?= BASE_URL . 'question/xoa?id=' . $qs->id ?>">Xóa</a>
+                            <a class="btn btn-primary" href="<?= BASE_URL . 'question/'. $qs->id .'/cap-nhat'  ?>">Sửa</a>
+                            <a class="btn btn-danger" onclick="return confirm('Bạn có chắc muốn xóa?')" href="<?= BASE_URL . 'question/xoa/' . $qs->id ?>">Xóa</a>
                         </td>
                     </tr>
                 <?php endforeach ?>

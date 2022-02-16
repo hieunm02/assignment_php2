@@ -6,13 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../app/css/style.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>app/css/style.css">
 </head>
 
 <body>
     <div class="container">
         <header>
-            <a href="<?= BASE_URL ?>"><img src="../app/img/logo-3.png" alt="" class="logo"></a>
+            <a href="<?= BASE_URL ?>"><img src="<?= BASE_URL ?>app/img/logo-3.png" alt="" class="logo"></a>
             
             <?php require_once './app/views/nav/index.php' ?>
 
@@ -30,13 +30,13 @@
                 </div>
                 <div class="main">
                     <div class="name-quiz">
-                        <h2 style="text-transform: uppercase; font-family: Arial, Helvetica, sans-serif;"><?= $data['name'] ?></h2>
+                        <h2 style="text-transform: uppercase; font-family: Arial, Helvetica, sans-serif;"><?= $name ?></h2>
                     </div>
                     <div class="list-quiz">
                         <ul>
                             <?php foreach($quiz as $quiz) {  ?>
                             <li>
-                                <a href="<?= BASE_URL ?>quiz/lam-bai?id=<?= $quiz->id ?>" class="quiz" ><?= $quiz->name ?></a> : Điểm <?= $quiz->getStudentScore() ?>
+                                <a href="<?= BASE_URL . 'quiz/' . $quiz->id . '/lam-bai/'?>" class="quiz" ><?= $quiz->name ?></a> : Điểm <?= $quiz->getStudentScore() ?>
                         
                             </li><br>
 

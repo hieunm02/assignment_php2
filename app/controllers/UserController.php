@@ -27,12 +27,6 @@ class UserController
 
     public function index()
     {
-        //chưa đăng nhập thì trả về trang đăng nhập
-        if (!isset($_SESSION['login']) || empty($_SESSION['login'])) {
-            header('location: ' . BASE_URL . 'login');
-            die;
-        }
-
         if (isset($_GET['pages'])) {
             $page = $_GET['pages'];
         } else {
@@ -79,18 +73,16 @@ class UserController
         die;
     }
 
-    public function remove()
+    public function remove($userId)
     {
-        $id = $_GET['id'];
-        User::destroy($id);
+        User::destroy($userId);
         header('location: ' . BASE_URL . 'user');
         die;
     }
 
-    public function update()
+    public function update($userId)
     {
-        $id = $_GET['id'];
-        $user = User::findById($id);
+        $user = User::findById($userId);
         $role = Role::all();
 
         include_once './app/views/user/update.php';

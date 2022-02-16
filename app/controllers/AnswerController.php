@@ -9,12 +9,6 @@ class AnswerController
 {
     public function index()
     {
-        //chưa đăng nhập thì trả về trang đăng nhập
-        if (!isset($_SESSION['login']) || empty($_SESSION['login'])) {
-            header('location: ' . BASE_URL . 'login');
-            die;
-        }
-
         if(isset($_GET['pages'])){
             $page = $_GET['pages'];
         }else{

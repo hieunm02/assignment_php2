@@ -30,8 +30,8 @@
                         <td><?= $sub->id ?></td>
                         <td><?= $sub->name ?></td>
                         <td>
-                            <a class="btn btn-primary" href="<?= BASE_URL . 'mon-hoc/cap-nhat?id=' . $sub->id ?>">Sửa</a>
-                            <a class="btn btn-danger" onclick="return confirm('Bạn có chắc muốn xóa?')" href="<?= BASE_URL . 'mon-hoc/xoa?id=' . $sub->id ?>">Xóa</a>
+                            <a class="btn btn-primary" href="<?= BASE_URL . 'mon-hoc/'.$sub->id.'/cap-nhat'."/$sub->name" ?>">Sửa</a>
+                            <a class="btn btn-danger" onclick="return confirm('Bạn có chắc muốn xóa?')" href="<?= BASE_URL . 'mon-hoc/xoa/' . $sub->id ?>">Xóa</a>
                         </td>
                     </tr>
                 <?php endforeach ?>

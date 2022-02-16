@@ -6,13 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../app/css/style.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/app/css/style.css">
 </head>
 
 <body>
     <div class="container">
         <header>
-            <a href="<?= BASE_URL ?>"><img src="../app/img/logo-3.png" alt="" class="logo"></a>
+            <a href="<?= BASE_URL ?>"><img src="<?= BASE_URL ?>/app/img/logo-3.png" alt="" class="logo"></a>
             <?php require_once './app/views/nav/index.php'; ?>
 
         </header>
@@ -43,7 +43,7 @@
                             <div class="question">
                                 <div class="list-question">
                                     <input type="hidden" name="studentId" value="<?= $_SESSION['id'] ?>" id="">
-                                    <input type="hidden" name="quizId" value="<?= $_GET['id'] ?>" id="">
+                                    <input type="hidden" name="quizId" value="<?= $startQuizId ?>" id="">
 
                                     <ul>
                                         <li><a class="startQuiz" id="<?= $startQuiz['id'] ?>"><?= $startQuiz['name'] ?></a></li><br>
