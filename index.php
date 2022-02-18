@@ -2,7 +2,7 @@
 session_start();
 require_once './app/commons/helpers.php';
 require_once './vendor/autoload.php';
-require_once './app/commons/db.php';
+require_once './app/commons/utils.php';
 require_once './app/commons/routing.php';
 
 // use App\Controllers\AnswerController;

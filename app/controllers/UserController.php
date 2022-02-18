@@ -39,7 +39,11 @@ class UserController
 
         $user = User::orderBy('id', 'desc')->limit(10)->get();
 
-        include_once './app/views/user/index.php';
+        // include_once './app/views/user/index.php';
+        return view('user.index', [
+            'users' => $user,
+            'pages' => $pages
+        ]);
     }
 
     public function addForm()

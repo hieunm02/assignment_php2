@@ -24,7 +24,11 @@ class StudentQuizController
                                   ->orderBy("student_quizs.id", "desc")
                                   ->limit(10)
                                   ->get();
-        include_once './app/views/student_quiz/index.php';
+        return view('student_quiz.index', [
+            'studentQuiz' => $studentQuiz,
+            'pages' => $pages
+        ]);
+
     }
     public function reset($studentQuizId)
     {

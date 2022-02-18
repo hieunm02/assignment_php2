@@ -21,7 +21,11 @@ class SubjectController{
         $subjects = Subject::orderBy('id', 'desc')->limit(10)->get();
 
 
-        include_once "./app/views/mon-hoc/index.php";
+        // include_once "./app/views/mon-hoc/index.php";
+        return view('mon-hoc.index', [
+            'subjects' => $subjects,
+            'pages' => $pages
+        ]);
     }
 
     public function addForm(){

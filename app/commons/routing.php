@@ -99,6 +99,10 @@ function applyRouting($url)
         $router->get('reset/{studentQuizId}', [StudentQuizController::class, 'reset']);
     });
 
+    $router->get('test-layout', function(){
+        return view('layouts.main');
+    });
+
 
 
 

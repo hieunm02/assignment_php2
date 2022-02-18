@@ -39,8 +39,6 @@
                         $quizId = $_POST['quizId'];
 
                         $answer = Answer::where('question_id', '=', $questionId)->where('is_correct', '=', 2)->get();
-                        echo '<pre>';
-                        var_dump($answer->id);die;
                         if ($answer->id == $_POST['question_' . $questionId]) {
                             $score++;
                         }
