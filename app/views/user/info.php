@@ -6,9 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../app/css/style.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>app/css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="../app/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>app/css/bootstrap.min.css">
     
 
 </head>
@@ -16,7 +16,7 @@
 <body>
     <div class="container" style="width:100%;">
         <header style="height: 77px; padding:30px 0;">
-            <a href="<?= BASE_URL ?>"><img src="../app/img/logo-3.png" alt="" class="logo" ></a>
+            <a href="<?= BASE_URL ?>"><img src="<?= BASE_URL ?>app/img/logo-3.png" alt="" class="logo" ></a>
 
             <?php require_once './app/views/nav/index.php'; ?>
 

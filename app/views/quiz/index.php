@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="app/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>app/css/bootstrap.min.css">
 
 
 </head>
@@ -21,12 +21,12 @@
             <thead>
                 <th>Mã quiz</th>
                 <th>Tên quiz</th>
-                <th>Subjec_id</th>
-                <th>duration_minutes</th>
-                <th>start_time</th>
-                <th>end_time</th>
+                <th>Môn học</th>
+                <th>Thời gian làm bài</th>
+                <th>Thời gian bắt đầu</th>
+                <th>Thời gian kết thúc</th>
                 <th>status</th>
-                <th>is_shuffle</th>
+                <th>Trộn</th>
 
                 <th>
                     <a class="btn btn-secondary" href="<?= BASE_URL . 'quiz/tao-moi' ?>">Tạo mới</a>

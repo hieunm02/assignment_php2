@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="app/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>app/css/bootstrap.min.css">
 
 
 </head>
@@ -22,10 +22,10 @@
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Content</th>
-                    <th>Question_id</th>
+                    <th>Câu hỏi</th>
+                    <th>Đáp án</th>
                     <th>is_correct</th>
-                    <th>img</th>
+                    <th>Ảnh</th>
                     <th>
                         <a class="btn btn-secondary" href="<?= BASE_URL . 'answer/tao-moi' ?>">Tạo mới</a>
                     </th>
@@ -35,13 +35,13 @@
                 <?php foreach ($answer as $ans) { ?>
                     <tr>
                         <td><?= $ans->id ?></td>
+                        <td><?= $ans->qs_name ?></td>
                         <td><?= $ans->content ?></td>
-                        <td><?= $ans->question_id ?></td>
                         <td><?= $ans->is_correct ?></td>
                         <td><?= $ans->img ?></td>
                         <td>
                             <a class="btn btn-primary" href="<?= BASE_URL . 'answer/cap-nhat?id=' . $ans->id ?>">Sửa</a>
-                            <a class="btn btn-danger" onclick="return confirm('Bạn có chắc muốn xóa?')" href="<?= BASE_URL . 'answer/xoa?id=' . $ans->id ?>">Xóa</a>
+                            <a class="btn btn-danger" onclick="return confirm('Bạn có chắc muốn xóa?')" href="<?= BASE_URL . 'answer/xoa/' . $ans->id ?>">Xóa</a>
                         </td>
                     </tr>
                 <?php } ?>

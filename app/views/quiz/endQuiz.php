@@ -6,13 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../app/css/style.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>app/css/style.css">
 </head>
 
 <body>
     <div class="container">
         <header>
-            <a href="<?= BASE_URL ?>"><img src="../app/img/logo-3.png" alt="" class="logo"></a>
+            <a href="<?= BASE_URL ?>"><img src="<?= BASE_URL ?>app/img/logo-3.png" alt="" class="logo"></a>
             <?php require_once './app/views/nav/index.php'; ?>
 
         </header>
@@ -38,7 +38,9 @@
                         $studentId = $_POST['studentId'];
                         $quizId = $_POST['quizId'];
 
-                        $answer = Answer::findAnswerIdCorrect($questionId);
+                        $answer = Answer::where('question_id', '=', $questionId)->where('is_correct', '=', 2)->get();
+                        echo '<pre>';
+                        var_dump($answer->id);die;
                         if ($answer->id == $_POST['question_' . $questionId]) {
                             $score++;
                         }

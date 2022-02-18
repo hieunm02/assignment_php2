@@ -20,7 +20,8 @@ class QuestionController
         $pages = ceil($count / $row);
         $from = ($page - 1) * $row;
 
-        $question = Question::allQuestion($from,$row);
+        // $question = Question::allQuestion($from,$row);
+        $question = Question::join("quizs", "questions.quiz_id", "quizs.id")->select("questions.*", "quizs.name as quiz_name")->orderBy("questions.id", 'desc')->get();
         include_once './app/views/question/index.php';
     }
 
@@ -61,25 +62,28 @@ class QuestionController
 
     public function update($questionId){
         $quiz = Quiz::all();
-        $data = Question::findById($questionId);
+        $data = Question::find($questionId);
         include_once './app/views/question/update.php';
     }
 
     public function savaUpdate(){
         $model = new Question();
         $imgFile = $_FILES['img'];
-        $data = [
-            'id' => $_POST['id'],
-            'name' => $_POST['name'],
-            'quiz_id' => $_POST['quiz_id'],
-            'img' => $_FILES['img']['name'],
-        ];
+
+        $id = $_POST['id'];
+        $model = Question::find($id);
+        $model->name = $_POST['name']; 
+        $model->quiz_id = $_POST['quiz_id']; 
+        $model->img = $_POST['img']; 
+
         if ( empty($_FILES['img']) == false) {
             $filename = $imgFile['name'];
             move_uploaded_file($imgFile['tmp_name'], 'app/img/' . $filename);
             $filename = 'img/' . $filename;
         }
-        $model->update($data);
+
+        $model->save();
+
         header('location: ' . BASE_URL . '/question');
         die;
     }

@@ -13,7 +13,7 @@ class LoginController {
             $email = $_POST['email'];
             $password = md5($_POST['password']);
             // var_dump($email, $password);die;
-            $model = User::where(['email', '=', $email ])->andWhere(['password', '=', $password])->first();
+            $model = User::where('email', '=', $email )->where('password', '=', $password)->first();
             $_SESSION['login'] = $model;
             $_SESSION['name'] = $_SESSION['login']->name;
             $_SESSION['id'] = $_SESSION['login']->id;

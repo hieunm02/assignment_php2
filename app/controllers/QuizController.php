@@ -23,15 +23,19 @@ class QuizController
         $pages = ceil($count / $row);
         $from = ($page - 1) * $row;
 
-        $quiz = Quiz::allQuiz($from,$row);
+        // $quiz = Quiz::allQuiz($from,$row);
+        $quiz = Quiz::join("subjects", "quizs.subject_id", "=", "subjects.id")
+                      ->select('quizs.*', 'subjects.name as sub_name')
+                      ->orderby("quizs.id", 'desc')
+                      ->get();
+
         include_once './app/views/quiz/index.php';
     }
 
     public function addForm()
     {
         $subjects = Subject::all();
-        // echo '<pre>';
-        // var_dump($subjects);die;
+
         include_once './app/views/quiz/add-form.php';
     }
 
@@ -63,7 +67,7 @@ class QuizController
     {
         $subjects = Subject::all();
 
-        $data = Quiz::findById($quizId);
+        $data = Quiz::find($quizId);
         include_once "./app/views/quiz/update.php";
     }
 
@@ -80,14 +84,25 @@ class QuizController
             'status' => $_POST['status'],
             'is_shuffle' => $_POST['is_shuffle'],
         ];
-        $model->update($data);
+        $id = $_POST['id'];
+
+        $model->id = Quiz::find($id);
+        $model->name = $_POST['name'];
+        $model->subject_id = $_POST['subject_id'];
+        $model->duration_minutes = $_POST['duration_minutes'];
+        $model->start_time = $_POST['start_time'];
+        $model->end_time = $_POST['end_time'];
+        $model->status = $_POST['status'];
+        $model->is_shuffle = $_POST['is_shuffle'];
+
+        $model->save();
         header('location: ' . BASE_URL . 'quiz');
         die;
     }
 
     public function starQuiz($startQuizId)
     {
-        $startQuiz = Question::startQuiz($startQuizId);
+        $startQuiz = Question::where('quiz_id', '=', $startQuizId)->get();
         $question = Question::all();
         // $allQuestion = Question::all();
         // foreach ($startQuiz as $allQuestion) {
@@ -95,14 +110,14 @@ class QuizController
         // $idQuestion = $allQuestion['id'];
         // echo '<pre>';
         // var_dump($idQuestion);die;
-        $answer = Answer::answerOfQuestion();
+        $answer = Answer::join('questions', 'answers.question_id', '=', 'questions.id')->get();
         //         echo '<pre>';
         // var_dump($answer);die;
 
         // }
 
         $user = User::all();
-        $data = Quiz::findById($startQuizId);
+        $data = Quiz::find($startQuizId);
         $role = $_SESSION['role'];
         $info = $_SESSION['name'];
         include_once './app/views/quiz/startQuiz.php';

@@ -18,7 +18,8 @@ class AnswerController
         $row = 10;
         $pages = ceil($count / $row);
         $from = ($page - 1) * $row;
-        $answer = Answer::sttOrderBy('id', false)->limit($from,$row)->get();
+        // $answer = Answer::orderBy('id', 'desc')->limit($from,$row)->fetch();
+        $answer = Answer::join("questions", "answers.question_id" , "questions.id")->select("answers.*", "questions.name as qs_name")->orderBy('id', 'desc')->limit(10)->get();
         include_once './app/views/answer/index.php';
     }
 

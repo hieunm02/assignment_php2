@@ -22,18 +22,18 @@ function applyRouting($url)
     // });
 
     //check-login
-    $router->filter('check-login', function(){
-        if(!isset($_SESSION['login']) || empty($_SESSION['login'])){
+    $router->filter('check-login', function () {
+        if (!isset($_SESSION['login']) || empty($_SESSION['login'])) {
             header('location: ' . BASE_URL . 'login');
             die;
         }
     });
 
     //alone
-    $router->get('/', [HomeController::class, 'index'], ['before' => 'check-login']);
-    $router->get('logout', [LoginController::class, 'logout'], ['before' => 'check-login']);
-    $router->get('dashboard', [DashboardController::class, 'index'], ['before' => 'check-login']);
-    $router->get('admin', [DashboardController::class, 'index'], ['before' => 'check-login']);
+        $router->get('/', [HomeController::class, 'index'], ['before' => 'check-login']);
+        $router->get('logout', [LoginController::class, 'logout'], ['before' => 'check-login']);
+        $router->get('dashboard', [DashboardController::class, 'index'], ['before' => 'check-login']);
+        $router->get('admin', [DashboardController::class, 'index'], ['before' => 'check-login']);
 
     //login
     $router->group(['prefix' => 'login'], function ($router) {
@@ -42,7 +42,7 @@ function applyRouting($url)
     });
 
     //subject
-    $router->group(['prefix' => 'mon-hoc','before' => 'check-login'], function ($router) {
+    $router->group(['prefix' => 'mon-hoc', 'before' => 'check-login'], function ($router) {
         $router->get('', [SubjectController::class, 'index']);
         $router->get('tao-moi', [SubjectController::class, 'addForm']);
         $router->get('{subjectId}/chi-tiet/{name}?', [SubjectController::class, 'deTail']);
@@ -53,7 +53,7 @@ function applyRouting($url)
     });
 
     //quiz
-    $router->group(['prefix' => 'quiz','before' => 'check-login'], function ($router) {
+    $router->group(['prefix' => 'quiz', 'before' => 'check-login'], function ($router) {
         $router->get('', [QuizController::class, 'index']);
         $router->get('tao-moi', [QuizController::class, 'addForm']);
         $router->post('luu-tao-moi', [QuizController::class, 'saveAdd']);
@@ -65,7 +65,7 @@ function applyRouting($url)
     });
 
     //question
-    $router->group(['prefix' => 'question','before' => 'check-login'], function ($router) {
+    $router->group(['prefix' => 'question', 'before' => 'check-login'], function ($router) {
         $router->get('', [QuestionController::class, 'index']);
         $router->get('tao-moi', [QuestionController::class, 'addForm']);
         $router->post('luu-tao-moi', [QuestionController::class, 'saveAdd']);
@@ -75,14 +75,14 @@ function applyRouting($url)
     });
 
     //answer
-    $router->group(['prefix' => 'answer','before' => 'check-login'], function ($router) {
+    $router->group(['prefix' => 'answer', 'before' => 'check-login'], function ($router) {
         $router->get('', [AnswerController::class, 'index']);
         $router->get('tao-moi', [AnswerController::class, 'addForm']);
         $router->post('luu-tao-moi', [AnswerController::class, 'saveAdd']);
     });
 
     //user
-    $router->group(['prefix' => 'user','before' => 'check-login'], function ($router) {
+    $router->group(['prefix' => 'user', 'before' => 'check-login'], function ($router) {
         $router->get('', [UserController::class, 'index']);
         $router->get('info', [UserController::class, 'info']);
         $router->get('tao-moi', [UserController::class, 'addForm']);
@@ -94,12 +94,12 @@ function applyRouting($url)
     });
 
     //studentQuiz
-    $router->group(['prefix' => 'studentquiz','before' => 'check-login'], function($router){
+    $router->group(['prefix' => 'studentquiz', 'before' => 'check-login'], function ($router) {
         $router->get('', [StudentQuizController::class, 'index']);
         $router->get('reset/{studentQuizId}', [StudentQuizController::class, 'reset']);
     });
 
-    
+
 
 
     $dispatcher = new Dispatcher($router->getData());

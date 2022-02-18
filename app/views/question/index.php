@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="app/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>app/css/bootstrap.min.css">
 
 </head>
 
@@ -19,10 +19,10 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Mã question</th>
-                    <th>Tên question</th>
-                    <th>Quiz</th>
-                    <th>Img</th>
+                    <th>Mã câu hỏi</th>
+                    <th>Tên câu hỏi</th>
+                    <th>Tên quiz</th>
+                    <th>Ảnh</th>
                     <th>
                         <a class="btn btn-secondary" href="<?= BASE_URL . 'question/tao-moi' ?>">Tạo mới</a>
 

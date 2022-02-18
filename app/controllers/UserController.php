@@ -37,7 +37,7 @@ class UserController
         $pages = ceil($count / $row);
         $from = ($page - 1) * $row;
 
-        $user = User::sttOrderBy('id', false)->limit($from,$row)->get();
+        $user = User::orderBy('id', 'desc')->limit(10)->get();
 
         include_once './app/views/user/index.php';
     }
@@ -82,7 +82,7 @@ class UserController
 
     public function update($userId)
     {
-        $user = User::findById($userId);
+        $user = User::find($userId);
         $role = Role::all();
 
         include_once './app/views/user/update.php';
@@ -92,14 +92,14 @@ class UserController
     {
         $model = new User();
         $imgFile = $_FILES['avatar'];
-        $data = [
-            'id' => $_POST['id'],
-            'name' => $_POST['name'],
-            'email' => $_POST['email'],
-            'password' => md5($_POST['password']),
-            'avatar' => $_FILES['avatar']['name'],
-            'role_id' => $_POST['role_id'],
-        ];
+
+        $id = $_POST['id'];
+        $model = User::find($id);
+        $model->name = $_POST['name'];
+        $model->email = $_POST['email'];
+        $model->password = $_POST['password'];
+        $model->avatar = $_FILES['avatar']['name'];
+        $model->role_id = $_POST['role_id'];
 
         if (empty($_FILES['avatar']) == false) {
             $fileName = $imgFile['name'];
@@ -107,8 +107,7 @@ class UserController
             $fileName = 'img/' . $fileName;
         }
 
-        $model->image = $fileName;
-        $model->update($data);
+        $model->save();
         header('location: ' . BASE_URL . 'user');
         die;
     }

@@ -18,7 +18,12 @@ class StudentQuizController
         $pages = ceil($count / $row);
         $from = ($page - 1) * $row;
 
-        $studentQuiz = StudentQuiz::studentQuiz($from, $row);
+        $studentQuiz = StudentQuiz::join("users", "student_quizs.student_id", "users.id")
+                                  ->join("quizs", "student_quizs.quiz_id", "quizs.id")
+                                  ->select("student_quizs.*","users.name as us_name", "quizs.name as q_name")
+                                  ->orderBy("student_quizs.id", "desc")
+                                  ->limit(10)
+                                  ->get();
         include_once './app/views/student_quiz/index.php';
     }
     public function reset($studentQuizId)

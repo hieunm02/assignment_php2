@@ -17,7 +17,8 @@ class SubjectController{
         $pages = ceil($count / $row);
         $from = ($page - 1) * $row;
 
-        $subjects = Subject::sttOrderBy('id', false)->limit($from, $row)->get();
+        // $subjects = Subject::orderBy('id', 'desc')->limit($from, $row)->get();
+        $subjects = Subject::orderBy('id', 'desc')->limit(10)->get();
 
 
         include_once "./app/views/mon-hoc/index.php";
@@ -55,25 +56,25 @@ class SubjectController{
 
     public function update($subjectId, $name){
         // $id = $_GET['id'];
-        $data = Subject::findById($subjectId);
+        $data = Subject::find($subjectId);
         include_once "./app/views/mon-hoc/update.php";
 
     }
 
     public function saveUpdate(){
         $model = new Subject();
-        $imgFile = $_FILES['avatar'];
-        $data = [
-            'id' => $_POST['id'],
-            'name' => $_POST['name'],
-            'avatar' => $_FILES['avatar']['name']
-        ];
+        $imgFile = $_FILES['avatar'];      
+        $id = $_POST['id'];
+        $model = Subject::find($id);
+        $model->name = $_POST['name'];
+        $model->avatar = $_FILES['avatar']['name'];
         if ( empty($_FILES['avatar']) == false) {
             $filename = $imgFile['name'];
             move_uploaded_file($imgFile['tmp_name'], 'app/img/' . $filename);
             $filename = 'img/' . $filename;
         }
-        $model->update($data);
+
+        $model->save();
         header('location: ' . BASE_URL . 'mon-hoc');
         die;
 
@@ -81,8 +82,8 @@ class SubjectController{
 
     public function deTail($subjectId, $name){
         // $id = $_GET['id'];
-        $data = Subject::findById($subjectId);
-        $quiz = Quiz::where(["subject_id", '=', $subjectId])->get();
+        $data = Subject::find($subjectId);
+        $quiz = Quiz::where("subject_id", '=', $subjectId)->get();
         $user = User::all();
         $role = $_SESSION['role'];
         $info = $_SESSION['name'];
