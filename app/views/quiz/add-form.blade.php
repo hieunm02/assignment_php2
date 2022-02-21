@@ -6,21 +6,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="<?= BASE_URL ?>app/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ BASE_URL }}app/css/bootstrap.min.css">
 </head>
 
 <body>
 
 
-    <form action="<?= BASE_URL . 'quiz/luu-tao-moi' ?>" method="post">
+    <form action="{{ BASE_URL . 'quiz/luu-tao-moi' }}" method="post">
         <div>
             <label for="">Tên Quiz</label>
             <input type="text" name="name"><br>
             <label for="">Danh mục</label>
             <select name="subject_id" id="">
-                <?php foreach ($subjects as $sub) { ?>
-                    <option value="<?= $sub->id ?>"><?= $sub->name ?></option>
-                <?php }  ?>
+                @foreach ($subjects as $sub) 
+                    <option value="{{ $sub->id }}">{{ $sub->name }}</option>
+                @endforeach
             </select><br>
             <label for="">Thời gian làm bài</label>
             <input type="number" name="duration_minutes"><br>

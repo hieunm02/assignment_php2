@@ -22,14 +22,24 @@ class QuestionController
 
         // $question = Question::allQuestion($from,$row);
         $question = Question::join("quizs", "questions.quiz_id", "quizs.id")->select("questions.*", "quizs.name as quiz_name")->orderBy("questions.id", 'desc')->get();
-        include_once './app/views/question/index.php';
+        
+        return view('question.index', [
+            'count' => $count,
+            'row' => $row,
+            'pages' => $pages,
+            'from' => $from,
+            'question' => $question,
+        ]);
     }
 
     public function addForm(){
         $quiz = Quiz::all();
         $question = Question::all();
 
-        include_once './app/views/question/add-form.php';
+        return view('question.add-form', [
+            'quiz' => $quiz,
+            'question' => $question,
+        ]);
     }
 
     public function saveAdd(){
@@ -63,10 +73,14 @@ class QuestionController
     public function update($questionId){
         $quiz = Quiz::all();
         $data = Question::find($questionId);
-        include_once './app/views/question/update.php';
+        
+        return view('question.update', [
+            'quiz' => $quiz,
+            'data' => $data,
+        ]);
     }
 
-    public function savaUpdate(){
+    public function saveUpdate(){
         $model = new Question();
         $imgFile = $_FILES['img'];
 

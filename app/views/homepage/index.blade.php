@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="<?= BASE_URL ?>app/css/style.css">
+    <link rel="stylesheet" href="{{ BASE_URL }}app/css/style.css">
 </head>
 
 <body>
@@ -20,24 +20,24 @@
 
         <main>
                 <div class="product">
-                <?php foreach ($subject as $sub) { ?>
+                @foreach($subject as $sub)
                     <div class="product__item">
                         <div class="product-header">
                             <div class="product-button">
-                                <a href="mon-hoc/<?= $sub->id ?>/chi-tiet/<?= $sub->name ?>"><button type="submit">Làm Quiz</button></a>
+                                <a href="mon-hoc/{{ $sub->id }}/chi-tiet/{{ $sub->name }}"><button type="submit">Làm Quiz</button></a>
                             </div>
                             <div class="product-image">
-                                <img src="app/img/<?= $sub->avatar ?>" alt="" class="image">
+                                <img src="app/img/{{ $sub->avatar }}" alt="" class="image">
                             </div>
 
                         </div>
 
                         <div class="info">
-                            <h3>Mã môn: <?= $sub->id ?></h3>
-                            <a href="" class="info-name"><?= $sub->name ?></a>
+                            <h3>Mã môn: {{ $sub->id }}</h3>
+                            <a href="" class="info-name">{{ $sub->name }}</a>
                         </div>
                     </div>
-                <?php } ?>
+                @endforeach
             </div>
         </main>
 

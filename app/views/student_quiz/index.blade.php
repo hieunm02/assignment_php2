@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <?php require_once './app/views/nav/nav-admin.php' ?>
+    <?php require_once './app/views/nav/nav-admin.blade.php' ?>
     <div style="padding: 20px;">
         <h2 style="margin-top: 20px;margin-bottom: 20px;">Điểm</h2>
 
@@ -21,6 +21,7 @@
                     <th>Tên sinh viên</th>
                     <th>Tên quiz</th>
                     <th>Điểm</th>
+                    <th>Môn học</th>
                     <th></th>
                 </tr>
             </thead>
@@ -34,6 +35,7 @@
                         <td><a class="btn btn-danger" onclick="return confirm('Bạn có chắc muốn reset?')" href="{{ BASE_URL . 'studentquiz/reset/' . $s->id }}">Reset</a></td>
                     </tr>
                 @endforeach
+
             </tbody>
         </table>
     </div>

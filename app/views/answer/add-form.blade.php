@@ -6,18 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="<?= BASE_URL ?>app/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ BASE_URL }}app/css/bootstrap.min.css">
 </head>
 
 <body>
 
-    <form action="<?= BASE_URL ?>answer/luu-tao-moi" method="POST" enctype="multipart/form-data">
+    <form action="{{ BASE_URL }}answer/luu-tao-moi" method="POST" enctype="multipart/form-data">
         <div>
             <h3>Chọn câu hỏi</h3>
             <select name="question_id" id="">
-                <?php foreach ($question as $ques) { ?>
-                    <option value="<?= $ques->id ?>"><?= $ques->name ?></option>
-                <?php } ?>
+                @foreach($question as $ques)
+                    <option value="{{ $ques->id }}">{{ $ques->name }}</option>
+                @endforeach
             </select>
         </div>
         <hr>

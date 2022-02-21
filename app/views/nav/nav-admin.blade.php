@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="<?= BASE_URL ?>app/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ BASE_URL }}app/css/bootstrap.min.css">
 
 
 
@@ -16,22 +16,22 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active mr-3">
-      <a class="navbar-brand" href="<?= BASE_URL ?>mon-hoc">Môn học</a>
+      <a class="navbar-brand" href="{{ BASE_URL }}mon-hoc">Môn học</a>
       </li>
       <li class="nav-item active mr-3">
-      <a class="navbar-brand" href="<?= BASE_URL ?>quiz">quiz</a>
+      <a class="navbar-brand" href="{{ BASE_URL }}quiz">quiz</a>
       </li>
       <li class="nav-item active mr-3">
-      <a class="navbar-brand" href="<?= BASE_URL ?>question">Câu hỏi quiz</a>
+      <a class="navbar-brand" href="{{ BASE_URL }}question">Câu hỏi quiz</a>
       </li>
       <li class="nav-item active mr-3">
-      <a class="navbar-brand" href="<?= BASE_URL ?>answer">Đáp án</a>
+      <a class="navbar-brand" href="{{ BASE_URL }}answer">Đáp án</a>
       </li>
       <li class="nav-item active mr-3">
-      <a class="navbar-brand" href="<?= BASE_URL ?>user">Tài khoản</a>
+      <a class="navbar-brand" href="{{ BASE_URL }}user">Tài khoản</a>
       </li>
       <li class="nav-item active mr-3">
-      <a class="navbar-brand" href="<?= BASE_URL ?>studentquiz">Điểm</a>
+      <a class="navbar-brand" href="{{ BASE_URL }}studentquiz">Điểm</a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">

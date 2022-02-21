@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="<?= BASE_URL ?>app/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ BASE_URL }}app/css/bootstrap.min.css">
 </head>
 
 <body>
 
-    <form action="<?= BASE_URL . 'user/luu-tao-moi' ?> " method="POST" enctype="multipart/form-data">
+    <form action="{{ BASE_URL . 'user/luu-tao-moi' }} " method="POST" enctype="multipart/form-data">
         <div>
             <label for="">Tên</label>
             <input type="text" name="name"><br>
@@ -24,7 +24,7 @@
             <label for="">Quyền</label>
             <select name="role_id" id="">
                 <?php foreach ($role as $role) { ?>
-                    <option value="<?= $role->id ?>"><?= $role->name ?></option>
+                    <option value="{{ $role->id }}">{{ $role->name }}</option>
                 <?php } ?>
             </select>
         </div>

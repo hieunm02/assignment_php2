@@ -22,7 +22,17 @@ class UserController
         } else {
             $avatar = "avt.jpg";
         }
-        include_once './app/views/user/info.php';
+        
+        
+        return view('user.info', [
+            'user' => $user,
+            'id' => $id,
+            'info' => $info,
+            'email' => $email,
+            'password' => $password,
+            'avatar' => $avatar,
+            'role' => $role,
+        ]);
     }
 
     public function index()
@@ -50,7 +60,11 @@ class UserController
     {
 
         $role = Role::all();
-        include_once './app/views/user/add-form.php';
+        
+        
+        return view('user.add-form', [
+            'role' => $role,
+        ]);
     }
 
     public function saveAdd()
@@ -89,7 +103,10 @@ class UserController
         $user = User::find($userId);
         $role = Role::all();
 
-        include_once './app/views/user/update.php';
+        return view('user.update', [
+            'user' => $user,
+            'role' => $role,
+        ]);
     }
 
     public function saveUpdate()

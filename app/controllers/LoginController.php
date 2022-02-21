@@ -5,7 +5,7 @@ use App\Models\User;
 
 class LoginController {
         public function index(){
-            include_once './app/views/login/form-login.php';
+            return view('login.form-login', []);
         }
 
         public function checkLogin(){
@@ -33,7 +33,7 @@ class LoginController {
         }
 
         public function logout(){
-            include_once './app/views/login/logout.php';
+            return view('login.logout', []);
         }
     }
 

@@ -14,6 +14,11 @@ class HomeController
         $role = $_SESSION['role'];
         $subject = Subject::all();
 
-        include_once './app/views/homepage/index.php';
+        return view('homepage.index', [
+            'user' => $user,
+            'info' => $info,
+            'role' => $role,
+            'subject' => $subject,
+        ]);
     }
 }

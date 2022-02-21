@@ -20,13 +20,23 @@ class AnswerController
         $from = ($page - 1) * $row;
         // $answer = Answer::orderBy('id', 'desc')->limit($from,$row)->fetch();
         $answer = Answer::join("questions", "answers.question_id" , "questions.id")->select("answers.*", "questions.name as qs_name")->orderBy('id', 'desc')->limit(10)->get();
-        include_once './app/views/answer/index.php';
+        
+        return view('answer.index', [
+            'count' => $count,
+            'row' => $row,
+            'pages' => $pages,
+            'from' => $from,
+            'answer' => $answer,
+        ]);
     }
 
     public function addForm()
     {
         $question = Question::all();
-        include_once './app/views/answer/add-form.php';
+        
+        return view('answer.add-form', [
+            'question' => $question,
+        ]);
     }
     public function saveAdd()
     {
@@ -105,6 +115,43 @@ class AnswerController
         $model->insert($data4);
 
         header('location: ' . BASE_URL . 'answer');
+        die;
+    }
+
+    public function update($answerId){
+        $data = Answer::find($answerId);
+        
+        return view('answer.update', [
+            'data' => $data
+        ]);
+    }
+
+    
+    public function saveUpdate(){
+        $model = new Answer();
+        $imgFile = $_FILES['img'];
+
+        $id = $_POST['id'];
+        $model = Answer::find($id);
+        $model->content = $_POST['content']; 
+        $model->is_correct = $_POST['is_correct']; 
+        $model->img = $_FILES['img']['name']; 
+
+        if ( empty($_FILES['img']) == false) {
+            $filename = $imgFile['name'];
+            move_uploaded_file($imgFile['tmp_name'], 'app/img/' . $filename);
+            $filename = 'img/' . $filename;
+        }
+
+        $model->save();
+
+        header('location: ' . BASE_URL . '/answer');
+        die;
+    }
+
+    public function remove($answerId){
+        Answer::destroy($answerId);
+        header('location: ' . BASE_URL . '/answer');
         die;
     }
 }

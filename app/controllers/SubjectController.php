@@ -21,7 +21,6 @@ class SubjectController{
         $subjects = Subject::orderBy('id', 'desc')->limit(10)->get();
 
 
-        // include_once "./app/views/mon-hoc/index.php";
         return view('mon-hoc.index', [
             'subjects' => $subjects,
             'pages' => $pages
@@ -29,7 +28,7 @@ class SubjectController{
     }
 
     public function addForm(){
-        include_once "./app/views/mon-hoc/add-form.php";
+        return view('mon-hoc.add-form', []);
     }
 
     public function saveAdd(){
@@ -52,16 +51,17 @@ class SubjectController{
     }
 
     public function remove($subjectId){
-        // $id = $_GET['id'];
         Subject::destroy($subjectId);
         header('location: ' . BASE_URL . 'mon-hoc');
         die;
     }
 
     public function update($subjectId, $name){
-        // $id = $_GET['id'];
         $data = Subject::find($subjectId);
-        include_once "./app/views/mon-hoc/update.php";
+        
+        return view('mon-hoc.update', [
+            'data' => $data
+        ]);
 
     }
 
@@ -85,14 +85,19 @@ class SubjectController{
     }
 
     public function deTail($subjectId, $name){
-        // $id = $_GET['id'];
         $data = Subject::find($subjectId);
         $quiz = Quiz::where("subject_id", '=', $subjectId)->get();
         $user = User::all();
         $role = $_SESSION['role'];
         $info = $_SESSION['name'];
 
-        include_once "./app/views/mon-hoc/detail.php";
+        return view('mon-hoc.detail', [
+            'data' => $data,
+            'quiz' => $quiz,
+            'user' => $user,
+            'role' => $role,
+            'info' => $info,
+        ]);
     }
 }
 ?>

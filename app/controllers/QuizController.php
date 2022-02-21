@@ -29,14 +29,22 @@ class QuizController
                       ->orderby("quizs.id", 'desc')
                       ->get();
 
-        include_once './app/views/quiz/index.php';
+        
+        return view('quiz.index', [
+            'count' => $count,
+            'pages' => $pages,
+            'from' => $from,
+            'quiz' => $quiz,
+        ]);
     }
 
     public function addForm()
     {
         $subjects = Subject::all();
 
-        include_once './app/views/quiz/add-form.php';
+        return view('quiz.add-form', [
+            'subjects' => $subjects,
+        ]);
     }
 
     public function saveAdd()
@@ -68,7 +76,11 @@ class QuizController
         $subjects = Subject::all();
 
         $data = Quiz::find($quizId);
-        include_once "./app/views/quiz/update.php";
+        
+        return view('quiz.update', [
+            'subjects' => $subjects,
+            'data' => $data,
+        ]);
     }
 
     public function saveUpdate()
@@ -120,7 +132,17 @@ class QuizController
         $data = Quiz::find($startQuizId);
         $role = $_SESSION['role'];
         $info = $_SESSION['name'];
-        include_once './app/views/quiz/startQuiz.php';
+        
+        
+        return view('quiz.startQuiz', [
+            'startQuiz' => $startQuiz,
+            'question' => $question,
+            'answer' => $answer,
+            'user' => $user,
+            'data' => $data,
+            'role' => $role,
+            'info' => $info,
+        ]);
     }
 
     public function endQuiz(){
@@ -129,6 +151,12 @@ class QuizController
        
         $role = $_SESSION['role'];
         $info = $_SESSION['name'];
-        include_once './app/views/quiz/endQuiz.php';
+        
+        return view('quiz.endQuiz', [
+            'modal' => $modal,
+            'user' => $user,
+            'role' => $role,
+            'info' => $info,
+        ]);
     }
 }

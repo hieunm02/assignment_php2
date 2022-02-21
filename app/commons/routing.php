@@ -70,7 +70,7 @@ function applyRouting($url)
         $router->get('tao-moi', [QuestionController::class, 'addForm']);
         $router->post('luu-tao-moi', [QuestionController::class, 'saveAdd']);
         $router->get('{questionId}/cap-nhat/{name}?', [QuestionController::class, 'update']);
-        $router->post('luu-cap-nhat', [QuestionController::class, 'savaUpdate']);
+        $router->post('luu-cap-nhat', [QuestionController::class, 'saveUpdate']);
         $router->get('xoa/{questionId}', [QuestionController::class, 'remove']);
     });
 
@@ -79,6 +79,9 @@ function applyRouting($url)
         $router->get('', [AnswerController::class, 'index']);
         $router->get('tao-moi', [AnswerController::class, 'addForm']);
         $router->post('luu-tao-moi', [AnswerController::class, 'saveAdd']);
+        $router->get('{answerId}/cap-nhat/{name}?', [AnswerController::class, 'update']);
+        $router->post('luu-cap-nhat', [AnswerController::class, 'saveUpdate']);
+        $router->get('xoa/{answerId}', [AnswerController::class, 'remove']);
     });
 
     //user

@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <link rel="stylesheet" href="<?= BASE_URL ?>app/css/font-awesome.css">
+  <link rel="stylesheet" href="{{ BASE_URL }}app/css/font-awesome.css">
   <link href="/your-path-to-fontawesome/css/all.css" rel="stylesheet">
 </head>
 
@@ -19,7 +19,7 @@
           <img src="app/img/FPT_Polytechnic_Hanoi.png" class="img-fluid" alt="">
         </div>
         <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-          <form action="<?= BASE_URL . 'login/check-login' ?>" method="post">
+          <form action="{{ BASE_URL . 'login/check-login' }}" method="post">
             <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
               <p class="lead fw-normal mb-0 me-3">Đăng nhập với</p>
               <button type="button" class="btn btn-primary btn-floating mx-1">

@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="<?= BASE_URL ?>app/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ BASE_URL }}app/css/bootstrap.min.css">
 
 </head>
 
 <body>
-    <?php require_once './app/views/nav/nav-admin.php' ?>
+    <?php require_once './app/views/nav/nav-admin.blade.php' ?>
 
     <div style="padding: 20px;">
         <h2 style="margin-top: 20px;margin-bottom: 20px;">Câu hỏi Quiz</h2>
@@ -24,24 +24,24 @@
                     <th>Tên quiz</th>
                     <th>Ảnh</th>
                     <th>
-                        <a class="btn btn-secondary" href="<?= BASE_URL . 'question/tao-moi' ?>">Tạo mới</a>
+                        <a class="btn btn-secondary" href="{{ BASE_URL . 'question/tao-moi' }}">Tạo mới</a>
 
                     </th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($question as $qs) : ?>
+                @foreach($question as $qs)
                     <tr>
-                        <td><?= $qs->id ?></td>
-                        <td><?= $qs->name ?></td>
-                        <td><?= $qs->quiz_name ?></td>
-                        <td><img src="app/img/<?= $qs->img ?>" alt=""></td>
+                        <td>{{ $qs->id }}</td>
+                        <td>{{ $qs->name }}</td>
+                        <td>{{ $qs->quiz_name }}</td>
+                        <td><img src="app/img/{{ $qs->img }}" alt=""></td>
                         <td>
-                            <a class="btn btn-primary" href="<?= BASE_URL . 'question/'. $qs->id .'/cap-nhat'  ?>">Sửa</a>
-                            <a class="btn btn-danger" onclick="return confirm('Bạn có chắc muốn xóa?')" href="<?= BASE_URL . 'question/xoa/' . $qs->id ?>">Xóa</a>
+                            <a class="btn btn-primary" href="{{ BASE_URL . 'question/'. $qs->id .'/cap-nhat'  }}">Sửa</a>
+                            <a class="btn btn-danger" onclick="return confirm('Bạn có chắc muốn xóa?')" href="{{ BASE_URL . 'question/xoa/' . $qs->id }}">Xóa</a>
                         </td>
                     </tr>
-                <?php endforeach ?>
+                @endforeach 
             </tbody>
         </table>
     </div>
@@ -54,9 +54,9 @@
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
-            <?php for ($i = 1; $i <= $pages; $i++) { ?>
-                <li class="page-item"><a class="page-link" href="<?= BASE_URL . 'question?pages=' . $i ?>"><?= $i ?></a></li>
-            <?php } ?>
+            @for($i = 1; $i <= $pages; $i++)
+                <li class="page-item"><a class="page-link" href="{{ BASE_URL . 'question?pages=' . $i }}">{{ $i }}</a></li>
+            @endfor
             <li class="page-item">
                 <a class="page-link" href="#" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>

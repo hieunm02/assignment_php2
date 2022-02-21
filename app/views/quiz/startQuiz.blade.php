@@ -6,13 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="<?= BASE_URL ?>/app/css/style.css">
+    <link rel="stylesheet" href="{{ BASE_URL }}/app/css/style.css">
 </head>
 
 <body>
     <div class="container">
         <header>
-            <a href="<?= BASE_URL ?>"><img src="<?= BASE_URL ?>/app/img/logo-3.png" alt="" class="logo"></a>
+            <a href="{{ BASE_URL }}"><img src="{{ BASE_URL }}/app/img/logo-3.png" alt="" class="logo"></a>
             <?php require_once './app/views/nav/index.php'; ?>
 
         </header>
@@ -30,37 +30,37 @@
                 <div class="main">
 
                     <div class="name-quiz">
-                        <h2 style="text-transform: uppercase; font-family: Arial, Helvetica, sans-serif;"><?= $data['name'] ?></h2>
+                        <h2 style="text-transform: uppercase; font-family: Arial, Helvetica, sans-serif;">{{ $data['name'] }}</h2>
                     </div>
                     <div>
-                        <!-- <h2>Thời gian làm bài: <span id="time"><?= $data['duration_minutes'] ?> </span> Phút</h2> -->
+                        <!-- <h2>Thời gian làm bài: <span id="time">{{ $data['duration_minutes'] }} </span> Phút</h2> -->
                     </div>
 
                     <?php $_SESSION['countQuestion'] = count($startQuiz) ?>
                     <!-- câu hỏi -->
-                    <form action="<?= BASE_URL ?>quiz/result" method="POST">
-                        <?php foreach ($startQuiz as $startQuiz) {  ?>
+                    <form action="{{ BASE_URL }}quiz/result" method="POST">
+                        @foreach ($startQuiz as $startQuiz)
                             <div class="question">
                                 <div class="list-question">
-                                    <input type="hidden" name="studentId" value="<?= $_SESSION['id'] ?>" id="">
-                                    <input type="hidden" name="quizId" value="<?= $startQuizId ?>" id="">
+                                    <input type="hidden" name="studentId" value="{{ $_SESSION['id'] }}" id="">
+                                    <input type="hidden" name="quizId" value="{{ $startQuizId }}" id="">
 
                                     <ul>
-                                        <li><a class="startQuiz" id="<?= $startQuiz['id'] ?>"><?= $startQuiz['name'] ?></a></li><br>
+                                        <li><a class="startQuiz" id="{{ $startQuiz['id'] }}">{{ $startQuiz['name'] }}</a></li><br>
                                         <li>
-                                            <input type="hidden" name="questionId[]" value="<?= $startQuiz['id'] ?>" id="">
+                                            <input type="hidden" name="questionId[]" value="{{ $startQuiz['id'] }}" id="">
                                             <!-- câu trả lời -->
-                                            <?php foreach ($answer as $ans) { ?>
+                                            @foreach ($answer as $ans) 
                                                 <?php if ($startQuiz['id'] == $ans['question_id']) { ?>
-                                                    <input type="radio" name="question_<?= $startQuiz['id'] ?>" value="<?= $ans['id'] ?>"><?= $ans['content'] ?><br>
+                                                    <input type="radio" name="question_{{ $startQuiz['id'] }}" value="{{ $ans['id'] }}">{{ $ans['content'] }}<br>
                                                 <?php } ?>
-                                            <?php } ?>
+                                            @endforeach
                                         </li>
                                     </ul>
                                 </div>
                             </div>
 
-                        <?php } ?>
+                        @endforeach
                         <button type="submit" class="btn-endquiz" name="endQuiz">Hoàn thành</button><br>
 
                     </form><br>

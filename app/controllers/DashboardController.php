@@ -6,6 +6,6 @@ class DashboardController
 {
     public function index()
     {
-        include_once './app/views/nav/nav-admin.php';
+        return view('nav.nav-admin', []);
     }
 }
