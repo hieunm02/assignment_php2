@@ -1,50 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
- <meta charset="UTF-8">
- <meta http-equiv="X-UA-Compatible" content="IE=edge">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Document</title>
- <link rel="stylesheet" href="<?php echo \htmlentities(BASE_URL, ENT_QUOTES, 'UTF-8', false); ?>app/css/bootstrap.min.css">
-
-
-</head>
-
-<body>
- <?php require_once './app/views/nav/nav-admin.blade.php'?>
-
- <div style="padding: 20px;">
- <h2 style="margin-top: 20px;margin-bottom: 20px;">Quiz</h2>
-
+<?php $_shouldextend[1]=1; ?>
+<?php $this->startSection('title', 'Danh sách Quiz'); ?>
+<?php $this->startSection('content'); ?>
+<form id="search_form" action="" method="get">
+ <div class="row">
+ <div class="col-4">
+ <div class="form-group">
+ <label for="">Môn học</label>
+ <select id="select_subject" name="subject_id" class="form-control">
+ <?php $__currentLoopData = $subjects; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $item): $loop = $this->incrementLoopIndices();  ?>
+ <option <?php echo \htmlentities($item->id == $subjectId ? "selected" : "", ENT_QUOTES, 'UTF-8', false); ?> value="<?php echo \htmlentities($item->id, ENT_QUOTES, 'UTF-8', false); ?>"><?php echo \htmlentities($item->name, ENT_QUOTES, 'UTF-8', false); ?></option>
+ 
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </select>
+ </div>
+ </div>
+ </div>
+ </form>
  <table class="table table-striped">
  <thead>
  <th>Mã quiz</th>
  <th>Tên quiz</th>
- <th>Môn học</th>
  <th>Thời gian làm bài</th>
  <th>Thời gian bắt đầu</th>
  <th>Thời gian kết thúc</th>
  <th>status</th>
  <th>Trộn</th>
-
  <th>
- <a class="btn btn-secondary" href="<?php echo \htmlentities(BASE_URL . 'quiz/tao-moi', ENT_QUOTES, 'UTF-8', false); ?>">Tạo mới</a>
+ <?php
+ if(isset($_GET['subject_id'])){
+ $_GET['subject_id'] = $_GET['subject_id'];
+ }else{
+ $_GET['subject_id'] = 1;
+ }
+ ?>
+ <a class="btn btn-secondary" href="<?php echo \htmlentities(BASE_URL . 'quiz/tao-moi?id=' . $_GET['subject_id'], ENT_QUOTES, 'UTF-8', false); ?>">Tạo mới</a>
  </th>
  </thead>
  <tbody>
- <?php $__currentLoopData = $quiz; $this->addLoop($__currentLoopData);$this->getFirstLoop();
- foreach($__currentLoopData as $quiz): $loop = $this->incrementLoopIndices();  ?>
+ <?php $__currentLoopData = $quizs; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $quizs): $loop = $this->incrementLoopIndices();  ?>
  <tr>
- <td><?php echo \htmlentities($quiz->id, ENT_QUOTES, 'UTF-8', false); ?></td>
- <td><?php echo \htmlentities($quiz->name, ENT_QUOTES, 'UTF-8', false); ?></td>
- <td><?php echo \htmlentities($quiz->sub_name, ENT_QUOTES, 'UTF-8', false); ?></td>
- <td><?php echo \htmlentities($quiz->duration_minutes, ENT_QUOTES, 'UTF-8', false); ?></td>
- <td><?php echo \htmlentities($quiz->start_time, ENT_QUOTES, 'UTF-8', false); ?></td>
- <td><?php echo \htmlentities($quiz->end_time, ENT_QUOTES, 'UTF-8', false); ?></td>
- <td><?php echo \htmlentities($quiz->status, ENT_QUOTES, 'UTF-8', false); ?></td>
+ <td><?php echo \htmlentities($quizs->id, ENT_QUOTES, 'UTF-8', false); ?></td>
+ <td><?php echo \htmlentities($quizs->name, ENT_QUOTES, 'UTF-8', false); ?></td>
+ <td><?php echo \htmlentities($quizs->duration_minutes, ENT_QUOTES, 'UTF-8', false); ?></td>
+ <td><?php echo \htmlentities($quizs->start_time, ENT_QUOTES, 'UTF-8', false); ?></td>
+ <td><?php echo \htmlentities($quizs->end_time, ENT_QUOTES, 'UTF-8', false); ?></td>
+ <td><?php echo \htmlentities($quizs->status, ENT_QUOTES, 'UTF-8', false); ?></td>
  <td><?php
- if($quiz->is_shuffle == 1){
+ if($quizs->is_shuffle == 1){
  echo "không";
  }else{
  echo "Có";
@@ -52,8 +56,8 @@
  ?>
  </td>
  <td>
- <a class="btn btn-primary" href="<?php echo \htmlentities(BASE_URL . 'quiz/' . $quiz->id . '/cap-nhat', ENT_QUOTES, 'UTF-8', false); ?>">Sửa</a>
- <a class="btn btn-danger" onclick="return confirm('Bạn có chắc muốn xóa?')" href="<?php echo \htmlentities(BASE_URL . 'quiz/xoa/' . $quiz->id, ENT_QUOTES, 'UTF-8', false); ?>">Xóa</a>
+ <a class="btn btn-primary" href="<?php echo \htmlentities(BASE_URL . 'quiz/' . $quizs->id . '/cap-nhat?subject_id=' . $_GET['subject_id'], ENT_QUOTES, 'UTF-8', false); ?>">Sửa</a>
+ <a class="btn btn-danger" onclick="return confirm('Bạn có chắc muốn xóa?')" href="<?php echo \htmlentities(BASE_URL . 'quiz/xoa/' . $quizs->id, ENT_QUOTES, 'UTF-8', false); ?>">Xóa</a>
  </td>
  </tr>
  <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
@@ -78,6 +82,15 @@
  </li>
  </ul>
  </nav>
-</body>
 
-</html>
+
+<?php $this->stopSection(); ?>    
+<?php $this->startSection('page-script'); ?>
+<script>
+ $('#select_subject').on('change', function(){
+ $('form#search_form').trigger('submit');
+ })
+</script>
+<?php $this->stopSection(); ?>    
+
+<?php if (isset($_shouldextend[1])) { echo $this->runChild('layouts.main'); } ?>

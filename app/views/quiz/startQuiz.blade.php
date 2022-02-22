@@ -39,20 +39,21 @@
                     <?php $_SESSION['countQuestion'] = count($startQuiz) ?>
                     <!-- câu hỏi -->
                     <form action="{{ BASE_URL }}quiz/result" method="POST">
+                        <input type="hidden" name="studentId" value="{{ $_SESSION['id'] }}" id="">
+                        <input type="hidden" name="quizId" value="{{ $data->id }}" id="">
                         @foreach ($startQuiz as $startQuiz)
                             <div class="question">
                                 <div class="list-question">
-                                    <input type="hidden" name="studentId" value="{{ $_SESSION['id'] }}" id="">
-                                    <input type="hidden" name="quizId" value="{{ $startQuizId }}" id="">
+                                    
 
                                     <ul>
                                         <li><a class="startQuiz" id="{{ $startQuiz['id'] }}">{{ $startQuiz['name'] }}</a></li><br>
                                         <li>
-                                            <input type="hidden" name="questionId[]" value="{{ $startQuiz['id'] }}" id="">
+                                            <input type="hidden" name="questionId[]" value="{{ $startQuiz->id }}" id="">
                                             <!-- câu trả lời -->
                                             @foreach ($answer as $ans) 
                                                 <?php if ($startQuiz['id'] == $ans['question_id']) { ?>
-                                                    <input type="radio" name="question_{{ $startQuiz['id'] }}" value="{{ $ans['id'] }}">{{ $ans['content'] }}<br>
+                                                    <input type="radio" name="question_{{$startQuiz->id}}" value="{{ $ans->is_correct }}">{{ $ans['content'] }}<br>
                                                 <?php } ?>
                                             @endforeach
                                         </li>

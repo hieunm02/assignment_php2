@@ -6,6 +6,6 @@ class DashboardController
 {
     public function index()
     {
-        return view('nav.nav-admin', []);
+        return view('layouts.main', []);
     }
 }

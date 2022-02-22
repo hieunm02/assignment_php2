@@ -38,6 +38,7 @@ function applyRouting($url)
     //login
     $router->group(['prefix' => 'login'], function ($router) {
         $router->get('', [LoginController::class, 'index']);
+        $router->get('admin', [LoginController::class, 'formLoginAdmin']);
         $router->post('check-login', [LoginController::class, 'checkLogin']);
     });
 

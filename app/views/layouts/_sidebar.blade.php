@@ -55,9 +55,29 @@
                   <p>Thêm mới</p>
                 </a>
               </li>
-              
-            </ul>
           </li>
+        </ul>
+
+              <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-chart-pie"></i>
+              <p>
+                Quiz
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{BASE_URL . 'quiz'}}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Danh sách</p>
+                </a>
+              </li>
+
+        </ul>
+
+
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

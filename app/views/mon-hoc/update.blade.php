@@ -1,3 +1,5 @@
+@extends('layouts.main')
+@section('content')
 <form action="{{ BASE_URL . 'mon-hoc/luu-cap-nhat'}}" method="post" enctype="multipart/form-data">
     <div>
         <label for="">Tên danh mục</label>
@@ -11,3 +13,4 @@
         <button type="submit">Lưu</button>
     </div>
 </form>
+@endsection

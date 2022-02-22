@@ -12,9 +12,6 @@
 </head>
 
 <body>
-
-    <?php require_once './app/views/nav/nav-admin.blade.php' ?>
-
     <div style="padding: 20px;">
         <h2 style="margin-top: 20px;margin-bottom: 20px;">Đáp án</h2>
 

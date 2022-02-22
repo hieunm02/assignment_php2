@@ -12,7 +12,6 @@
 </head>
 
 <body>
-    <?php require_once './app/views/nav/nav-admin.php' ?>
     <div style="padding: 20px;">
 
         <h2 style="margin-top: 20px;margin-bottom: 20px;">Tài khoản</h2>

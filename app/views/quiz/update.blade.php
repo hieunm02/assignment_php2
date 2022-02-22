@@ -1,14 +1,11 @@
+@extends('layouts.main')
+@section('content')
 <form action="{{ BASE_URL . 'quiz/luu-cap-nhat'}}" method="post">
     <div>
         <input type="hidden" name="id" value="{{ $data['id'] }}">
         <label for="">Tên quiz</label>
         <input type="text" name="name" value="{{ $data['name'] }}"><br>
-        <label for="">Danh mục</label>
-        <select name="subject_id" id="">
-            @foreach($subjects as $sub)
-            <option value="{{$sub->id }}">{{$sub->name }}</option>
-            @endforeach
-        </select><br>
+        <input type="hidden" name="subject_id" value="{{$_GET['subject_id']}}">
         <label for="">Thời gian làm bài</label>
         <input type="text" name="duration_minutes" value="{{ $data['duration_minutes'] }}"><br>
         <label for="">Ngày bắt đầu</label>
@@ -26,3 +23,4 @@
         <button type="submit">Lưu</button>
     </div>
 </form>
+@endsection

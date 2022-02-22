@@ -1,49 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="{{ BASE_URL }}app/css/bootstrap.min.css">
-
-
-</head>
-
-<body>
-    <?php require_once './app/views/nav/nav-admin.blade.php'?>
-
-    <div style="padding: 20px;">
-        <h2 style="margin-top: 20px;margin-bottom: 20px;">Quiz</h2>
-
+@extends('layouts.main')
+@section('title', 'Danh sách Quiz')
+@section('content')
+<form id="search_form" action="" method="get">
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="">Môn học</label>
+                                    <select id="select_subject" name="subject_id" class="form-control">
+                                        @foreach ($subjects as $item)
+                                            <option {{$item->id == $subjectId ? "selected" : "" }} value="{{$item->id}}">{{$item->name}}</option>
+                                        
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
         <table class="table table-striped">
             <thead>
                 <th>Mã quiz</th>
                 <th>Tên quiz</th>
-                <th>Môn học</th>
                 <th>Thời gian làm bài</th>
                 <th>Thời gian bắt đầu</th>
                 <th>Thời gian kết thúc</th>
                 <th>status</th>
                 <th>Trộn</th>
-
                 <th>
-                    <a class="btn btn-secondary" href="{{ BASE_URL . 'quiz/tao-moi' }}">Tạo mới</a>
+                    <?php
+                        if(isset($_GET['subject_id'])){
+                            $_GET['subject_id'] = $_GET['subject_id'];
+                        }else{
+                            $_GET['subject_id'] = 1;
+                        }
+                    ?>
+                <a class="btn btn-secondary" href="{{ BASE_URL . 'quiz/tao-moi?id=' . $_GET['subject_id'] }}">Tạo mới</a>
                 </th>
             </thead>
             <tbody>
-                @foreach($quiz as $quiz)
+                @foreach($quizs as $quizs)
                     <tr>
-                        <td>{{ $quiz->id }}</td>
-                        <td>{{ $quiz->name }}</td>
-                        <td>{{ $quiz->sub_name }}</td>
-                        <td>{{ $quiz->duration_minutes }}</td>
-                        <td>{{ $quiz->start_time }}</td>
-                        <td>{{ $quiz->end_time }}</td>
-                        <td>{{ $quiz->status }}</td>
+                        <td>{{ $quizs->id }}</td>
+                        <td>{{ $quizs->name }}</td>
+                        <td>{{ $quizs->duration_minutes }}</td>
+                        <td>{{ $quizs->start_time }}</td>
+                        <td>{{ $quizs->end_time }}</td>
+                        <td>{{ $quizs->status }}</td>
                         <td><?php
-                            if($quiz->is_shuffle == 1){
+                            if($quizs->is_shuffle == 1){
                                 echo "không";
                             }else{
                                 echo "Có";
@@ -51,8 +54,8 @@
                         ?>
                         </td>
                         <td>
-                            <a class="btn btn-primary" href="{{ BASE_URL . 'quiz/' . $quiz->id . '/cap-nhat' }}">Sửa</a>
-                            <a class="btn btn-danger" onclick="return confirm('Bạn có chắc muốn xóa?')" href="{{ BASE_URL . 'quiz/xoa/' . $quiz->id }}">Xóa</a>
+                            <a class="btn btn-primary" href="{{ BASE_URL . 'quiz/' . $quizs->id . '/cap-nhat?subject_id=' . $_GET['subject_id']}}">Sửa</a>
+                            <a class="btn btn-danger" onclick="return confirm('Bạn có chắc muốn xóa?')" href="{{ BASE_URL . 'quiz/xoa/' . $quizs->id }}">Xóa</a>
                         </td>
                     </tr>
                 @endforeach
@@ -77,6 +80,13 @@
             </li>
         </ul>
     </nav>
-</body>
 
-</html>
+
+@endsection    
+@section('page-script')
+<script>
+    $('#select_subject').on('change', function(){
+        $('form#search_form').trigger('submit');
+    })
+</script>
+@endsection    

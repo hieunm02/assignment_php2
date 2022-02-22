@@ -8,6 +8,9 @@ class LoginController {
             return view('login.form-login', []);
         }
 
+        public function formLoginAdmin(){
+            return view('login.form-login-admin', []);
+        }
         public function checkLogin(){
             $login = User::all();
             $email = $_POST['email'];

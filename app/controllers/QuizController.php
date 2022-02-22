@@ -23,18 +23,17 @@ class QuizController
         $pages = ceil($count / $row);
         $from = ($page - 1) * $row;
 
-        // $quiz = Quiz::allQuiz($from,$row);
-        $quiz = Quiz::join("subjects", "quizs.subject_id", "=", "subjects.id")
-                      ->select('quizs.*', 'subjects.name as sub_name')
-                      ->orderby("quizs.id", 'desc')
-                      ->get();
 
-        
+        $subjects = Subject::all();
+        $subjectId = isset($_GET['subject_id']) ? $_GET['subject_id'] : $subjects[0]->id;
+        $quizs = Quiz::where('subject_id', $subjectId)->orderBy('id', 'desc')->get();
+
         return view('quiz.index', [
-            'count' => $count,
+            'subjects' => $subjects,
+            'subjectId' => $subjectId,
+            'quizs' => $quizs,
             'pages' => $pages,
             'from' => $from,
-            'quiz' => $quiz,
         ]);
     }
 
@@ -50,6 +49,7 @@ class QuizController
     public function saveAdd()
     {
         $model = new Quiz;
+        $id = $_GET['id'];
         $data = [
             'name' => $_POST['name'],
             'subject_id' => $_POST['subject_id'],
@@ -67,7 +67,7 @@ class QuizController
     public function remove($quizId)
     {
         Quiz::destroy($quizId);
-        header('location: ' . BASE_URL . 'quiz');
+        header('location: ' .  $_SERVER['HTTP_REFERER']);
         die;
     }
 
@@ -86,19 +86,9 @@ class QuizController
     public function saveUpdate()
     {
         $model = new Quiz();
-        $data = [
-            'id' => $_POST['id'],
-            'name' => $_POST['name'],
-            'subject_id' => $_POST['subject_id'],
-            'duration_minutes' => $_POST['duration_minutes'],
-            'start_time' => $_POST['start_time'],
-            'end_time' => $_POST['end_time'],
-            'status' => $_POST['status'],
-            'is_shuffle' => $_POST['is_shuffle'],
-        ];
         $id = $_POST['id'];
 
-        $model->id = Quiz::find($id);
+        $model = Quiz::find($id);
         $model->name = $_POST['name'];
         $model->subject_id = $_POST['subject_id'];
         $model->duration_minutes = $_POST['duration_minutes'];
@@ -116,17 +106,8 @@ class QuizController
     {
         $startQuiz = Question::where('quiz_id', '=', $startQuizId)->get();
         $question = Question::all();
-        // $allQuestion = Question::all();
-        // foreach ($startQuiz as $allQuestion) {
-
-        // $idQuestion = $allQuestion['id'];
-        // echo '<pre>';
-        // var_dump($idQuestion);die;
+        
         $answer = Answer::join('questions', 'answers.question_id', '=', 'questions.id')->get();
-        //         echo '<pre>';
-        // var_dump($answer);die;
-
-        // }
 
         $user = User::all();
         $data = Quiz::find($startQuizId);
@@ -146,17 +127,34 @@ class QuizController
     }
 
     public function endQuiz(){
+
         $modal = new StudentQuiz();
         $user = User::all();
        
         $role = $_SESSION['role'];
         $info = $_SESSION['name'];
         
+        $score = 0;
+        foreach($_POST['questionId'] as $questionId):
+            $studentId = $_POST['studentId'];
+            $quizId = $_POST['quizId'];
+
+            $answer = Answer::where('question_id', '=', $questionId)->where('is_correct', '=', 2)->get();
+            if ($_POST['question_' . $questionId] == 2) {
+                $score++;
+            }
+
+        endforeach ;
+
         return view('quiz.endQuiz', [
             'modal' => $modal,
             'user' => $user,
             'role' => $role,
             'info' => $info,
+            'studentId' => $studentId,
+            'quizId' => $quizId,
+            'answer' => $answer,
+            'score' => $score,
         ]);
     }
 }
