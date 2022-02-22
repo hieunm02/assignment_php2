@@ -1,25 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
- <meta charset="UTF-8">
- <meta http-equiv="X-UA-Compatible" content="IE=edge">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Document</title>
- <link rel="stylesheet" href="<?php echo \htmlentities(BASE_URL, ENT_QUOTES, 'UTF-8', false); ?>app/css/bootstrap.min.css">
-</head>
-
-<body>
- <?php require_once './app/views/nav/nav-admin.blade.php' ?>
- <div style="padding: 20px;">
- <h2 style="margin-top: 20px;margin-bottom: 20px;">Điểm</h2>
-
+<?php $_shouldextend[1]=1; ?>
+<?php $this->startSection('title', 'Danh sách tài khoản'); ?>
+<?php $this->startSection('content'); ?>
+<form id="search_form" action="" method="get">
+ <div class="row">
+ <div class="col-4">
+ <div class="form-group">
+ <label for="">Môn học</label>
+ <select id="select_quiz" name="quiz_id" class="form-control">
+ <?php $__currentLoopData = $quiz; $this->addLoop($__currentLoopData);$this->getFirstLoop();
+ foreach($__currentLoopData as $item): $loop = $this->incrementLoopIndices();  ?>
+ <option <?php echo \htmlentities($item->id == $quizId ? "selected" : "", ENT_QUOTES, 'UTF-8', false); ?> value="<?php echo \htmlentities($item->id, ENT_QUOTES, 'UTF-8', false); ?>"><?php echo \htmlentities($item->name, ENT_QUOTES, 'UTF-8', false); ?></option>
+ 
+ <?php endforeach; $this->popLoop(); $loop = $this->getFirstLoop(); ?>
+ </select>
+ </div>
+ </div>
+ </div>
+ </form>
  <table class="table table-striped">
  <thead>
  <tr>
  <th>Mã sinh viên</th>
  <th>Tên sinh viên</th>
- <th>Tên quiz</th>
  <th>Điểm</th>
  <th>Môn học</th>
  <th></th>
@@ -31,7 +33,6 @@
  <tr>
  <td><?php echo \htmlentities($s->student_id, ENT_QUOTES, 'UTF-8', false); ?></td>
  <td><?php echo \htmlentities($s->us_name, ENT_QUOTES, 'UTF-8', false); ?></td>
- <td><?php echo \htmlentities($s->q_name, ENT_QUOTES, 'UTF-8', false); ?></td>
  <td><?php echo \htmlentities($s->score, ENT_QUOTES, 'UTF-8', false); ?></td>
  <td><a class="btn btn-danger" onclick="return confirm('Bạn có chắc muốn reset?')" href="<?php echo \htmlentities(BASE_URL . 'studentquiz/reset/' . $s->id, ENT_QUOTES, 'UTF-8', false); ?>">Reset</a></td>
  </tr>
@@ -59,6 +60,12 @@
  </li>
  </ul>
  </nav>
-</body>
-
-</html>
+<?php $this->stopSection(); ?>
+<?php $this->startSection('page-script'); ?>
+<script>
+ $('#select_quiz').on('change', function(){
+ $('form#search_form').trigger('submit');
+ })
+</script>
+<?php $this->stopSection(); ?>   
+<?php if (isset($_shouldextend[1])) { echo $this->runChild('layouts.main'); } ?>

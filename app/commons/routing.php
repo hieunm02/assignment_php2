@@ -28,12 +28,17 @@ function applyRouting($url)
             die;
         }
     });
-
+    $router->filter('check-login-admin', function () {
+        if (!isset($_SESSION['login']) || empty($_SESSION['login']) || $_SESSION['role'] != 1) {
+            header('location: ' . BASE_URL . 'login');
+            die;
+        }
+    });
+    
     //alone
         $router->get('/', [HomeController::class, 'index'], ['before' => 'check-login']);
         $router->get('logout', [LoginController::class, 'logout'], ['before' => 'check-login']);
-        $router->get('dashboard', [DashboardController::class, 'index'], ['before' => 'check-login']);
-        $router->get('admin', [DashboardController::class, 'index'], ['before' => 'check-login']);
+        $router->get('admin', [DashboardController::class, 'dashboard'], ['before' => 'check-login-admin']);
 
     //login
     $router->group(['prefix' => 'login'], function ($router) {

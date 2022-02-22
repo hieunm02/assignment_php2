@@ -1,3 +1,6 @@
+@extends('layouts.main')
+@section('title', 'Danh sách tài khoản')
+@section('content')
 <form action="{{ BASE_URL . 'user/luu-cap-nhat' }}" method="POST" enctype="multipart/form-data">
 <div>
     <input type="hidden" name="id" id="" value="{{ $user['id'] }}">
@@ -21,3 +24,4 @@
     <button type="submit">Lưu</button>
 </div>
 </form>
+@endsection

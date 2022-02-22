@@ -1,16 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="{{ BASE_URL }}app/css/bootstrap.min.css">
-</head>
-
-<body>
-
+@extends('layouts.main')
+@section('title', 'Danh sách tài khoản')
+@section('content')
     <form action="{{ BASE_URL . 'user/luu-tao-moi' }} " method="POST" enctype="multipart/form-data">
         <div>
             <label for="">Tên</label>
@@ -32,6 +22,4 @@
             <button type="submit">Lưu</button>
         </div>
     </form>
-</body>
-
-</html>
+@endsection

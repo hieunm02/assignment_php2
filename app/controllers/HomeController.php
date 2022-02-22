@@ -14,6 +14,9 @@ class HomeController
         $role = $_SESSION['role'];
         $subject = Subject::all();
 
+        if (!isset($_SESSION['luottruycap'])) $_SESSION['luottruycap'] = 0;
+        else $_SESSION['luottruycap'] += 1;
+        
         return view('homepage.index', [
             'user' => $user,
             'info' => $info,

@@ -1,24 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="{{ BASE_URL }}app/css/bootstrap.min.css">
-</head>
-
-<body>
-    <div style="padding: 20px;">
-        <h2 style="margin-top: 20px;margin-bottom: 20px;">Điểm</h2>
-
+@extends('layouts.main')
+@section('title', 'Danh sách tài khoản')
+@section('content')
+<form id="search_form" action="" method="get">
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="">Môn học</label>
+                                    <select id="select_quiz" name="quiz_id" class="form-control">
+                                        @foreach ($quiz as $item)
+                                            <option {{$item->id == $quizId ? "selected" : "" }} value="{{$item->id}}">{{$item->name}}</option>
+                                        
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
         <table class="table table-striped">
             <thead>
                 <tr>
                     <th>Mã sinh viên</th>
                     <th>Tên sinh viên</th>
-                    <th>Tên quiz</th>
                     <th>Điểm</th>
                     <th>Môn học</th>
                     <th></th>
@@ -29,7 +31,6 @@
                     <tr>
                         <td>{{ $s->student_id }}</td>
                         <td>{{ $s->us_name }}</td>
-                        <td>{{ $s->q_name }}</td>
                         <td>{{ $s->score }}</td>
                         <td><a class="btn btn-danger" onclick="return confirm('Bạn có chắc muốn reset?')" href="{{ BASE_URL . 'studentquiz/reset/' . $s->id }}">Reset</a></td>
                     </tr>
@@ -57,6 +58,11 @@
             </li>
         </ul>
     </nav>
-</body>
-
-</html>
+@endsection
+@section('page-script')
+<script>
+    $('#select_quiz').on('change', function(){
+        $('form#search_form').trigger('submit');
+    })
+</script>
+@endsection   

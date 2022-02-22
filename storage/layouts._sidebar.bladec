@@ -2,10 +2,10 @@
  <!-- Sidebar user panel (optional) -->
  <div class="user-panel mt-3 pb-3 mb-3 d-flex">
  <div class="image">
- <img src="<?php echo \htmlentities(PUBLIC_URL, ENT_QUOTES, 'UTF-8', false); ?>dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+ <img src="<?php echo \htmlentities(BASE_URL, ENT_QUOTES, 'UTF-8', false); ?>app/img/<?php echo \htmlentities($_SESSION['avatar'], ENT_QUOTES, 'UTF-8', false); ?>" class="img-circle elevation-2" alt="User Image">
  </div>
  <div class="info">
- <a href="#" class="d-block">Alexander Pierce</a>
+ <a href="#" class="d-block"><?php echo \htmlentities($_SESSION['name'], ENT_QUOTES, 'UTF-8', false); ?></a>
  </div>
  </div>
 
@@ -25,16 +25,17 @@
  <nav class="mt-2">
  <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
  <li class="nav-item">
- <a href="#" class="nav-link">
+ <a href="<?php echo \htmlentities(BASE_URL, ENT_QUOTES, 'UTF-8', false); ?>admin" class="nav-link">
  <i class="nav-icon fas fa-home"></i>
  <p>
  Dashboard
- <i class="right fas fa-angle-left"></i>
  </p>
- </a> 
+ </a>
  </li>
- 
+ </ul>
+
  <!-- Môn học -->
+ <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
  <li class="nav-item">
  <a href="#" class="nav-link">
  <i class="nav-icon fas fa-chart-pie"></i>
@@ -50,10 +51,10 @@
  <p>Danh sách</p>
  </a>
  </li>
- 
+ </ul>
  </li>
  </ul>
- 
+
 
  <!-- Quiz -->
  <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -71,6 +72,8 @@
  <i class="far fa-circle nav-icon"></i>
  <p>Danh sách</p>
  </a>
+ </li>
+ </ul>
  </li>
  </ul>
 
@@ -92,11 +95,54 @@
  </a>
  </li>
  </ul>
+ </li>
  </ul>
 
-
-
+ <!-- tài khoản -->
+ <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+ <li class="nav-item">
+ <a href="#" class="nav-link">
+ <i class="nav-icon fas ion-person-stalker"></i>
+ <p>
+ Tài khoản
+ <i class="right fas fa-angle-left"></i>
+ </p>
+ </a>
+ <ul class="nav nav-treeview">
+ <li class="nav-item">
+ <a href="<?php echo \htmlentities(BASE_URL . 'user', ENT_QUOTES, 'UTF-8', false); ?>" class="nav-link">
+ <i class="far fa-circle nav-icon"></i>
+ <p>Danh sách</p>
+ </a>
+ </li>
  </ul>
+ </li>
+ </ul>
+
+ <!-- Điểm -->
+ <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+ <li class="nav-item">
+ <a href="#" class="nav-link">
+ <i class="nav-icon fas ion-ios-book"></i>
+ <p>
+ Điểm
+ <i class="right fas fa-angle-left"></i>
+ </p>
+ </a>
+ <ul class="nav nav-treeview">
+ <li class="nav-item">
+ <a href="<?php echo \htmlentities(BASE_URL . 'studentquiz', ENT_QUOTES, 'UTF-8', false); ?>" class="nav-link">
+ <i class="far fa-circle nav-icon"></i>
+ <p>Danh sách</p>
+ </a>
+ </li>
+ </ul>
+ </li>
+ </ul>
+
  </nav>
- <!-- /.sidebar-menu -->
+ <div class="logout" style="margin-top: 280px; margin-left: 20px;">
+ <a href="<?php echo \htmlentities(BASE_URL, ENT_QUOTES, 'UTF-8', false); ?>logout">Đăng xuất</a>
  </div>
+ <!-- /.sidebar-menu -->
+</div>
