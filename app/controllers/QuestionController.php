@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\Answer;
 use App\Models\Question;
 use App\Models\Quiz;
+use App\Models\Subject;
 
 class QuestionController
 {
@@ -20,15 +21,21 @@ class QuestionController
         $pages = ceil($count / $row);
         $from = ($page - 1) * $row;
 
-        // $question = Question::allQuestion($from,$row);
-        $question = Question::join("quizs", "questions.quiz_id", "quizs.id")->select("questions.*", "quizs.name as quiz_name")->orderBy("questions.id", 'desc')->get();
-        
+
+        $subjects = Subject::all();
+        $subjectId = isset($_GET['subject_id']) ? $_GET['subject_id'] : $subjects[0]->id;
+        $quiz = Quiz::where('subject_id', $subjectId)->get();
+        $quizId = isset($_GET['quiz_id']) ? $_GET['quiz_id'] : $quiz[0]->id;
+        $question = Question::where('quiz_id', $quizId)->orderBy('id', 'desc')->get();
+
         return view('question.index', [
-            'count' => $count,
-            'row' => $row,
+            'quiz' => $quiz,
+            'subjects' => $subjects,
+            'quizId' => $quizId,
+            'question' => $question,
             'pages' => $pages,
             'from' => $from,
-            'question' => $question,
+            'subjectId' => $subjectId,
         ]);
     }
 
@@ -66,7 +73,7 @@ class QuestionController
     public function remove($questionId)
     {
         Question::destroy($questionId);
-        header('location: ' . BASE_URL . 'question');
+        header('location: ' . $_SERVER['HTTP_REFERER']);
         die;
     }
 

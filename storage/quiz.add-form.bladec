@@ -19,7 +19,7 @@
 
  </div>
  <div>
- <button type="submit">Lưu</button>
+ <button onclick="alert('Thêm thành công')" type="submit">Lưu</button>
  </div>
 </form>
 <?php $this->stopSection(); ?>

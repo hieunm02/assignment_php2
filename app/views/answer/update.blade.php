@@ -1,3 +1,5 @@
+@extends('layouts.main')
+@section('content')
 <form action="{{ BASE_URL . 'answer/luu-cap-nhat'}}" method="post" enctype="multipart/form-data">
     <div>
         <label for="">Đáp án</label>
@@ -12,5 +14,7 @@
     </div>
     <div>
         <button type="submit">Lưu</button>
+        <a href="javascript:history.back()">Quay lại</a>
     </div>
 </form>
+@endsection

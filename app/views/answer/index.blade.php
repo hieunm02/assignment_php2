@@ -1,30 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="{{ BASE_URL }}app/css/bootstrap.min.css">
-
-
-</head>
-
-<body>
-    <div style="padding: 20px;">
-        <h2 style="margin-top: 20px;margin-bottom: 20px;">Đáp án</h2>
-
+@extends('layouts.main')
+@section('title', 'Danh sách đáp án')
+@section('content')
         <table class="table table-striped">
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Câu hỏi</th>
                     <th>Đáp án</th>
                     <th>Đúng/sai</th>
                     <th>Ảnh</th>
                     <th>
-                        <a class="btn btn-secondary" href="{{ BASE_URL . 'answer/tao-moi' }}">Tạo mới</a>
+                        <a class="btn btn-secondary" href="{{ BASE_URL . 'answer/tao-moi?question_id=' . $_GET['question_id']  }}">Tạo mới</a>
                     </th>
                 </tr>
             </thead>
@@ -32,7 +17,6 @@
                 @foreach($answer as $ans)
                     <tr>
                         <td>{{ $ans->id }}</td>
-                        <td>{{ $ans->qs_name }}</td>
                         <td>{{ $ans->content }}</td>
                         <td><?php 
                                 if($ans->is_correct == 1){
@@ -70,6 +54,4 @@
             </li>
         </ul>
     </nav>
-</body>
-
-</html>
+@endsection
