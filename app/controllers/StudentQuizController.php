@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\Quiz;
 use App\Models\StudentQuiz;
+use App\Models\Subject;
 
 class StudentQuizController
 {
@@ -19,10 +20,12 @@ class StudentQuizController
         $pages = ceil($count / $row);
         $from = ($page - 1) * $row;
 
-
-        $quiz = Quiz::all();
-        $quizId = isset($_GET['quiz_id']) ? $_GET['quiz_id'] : $quiz[0]->id;
-        $studentQuiz = StudentQuiz::where('quiz_id', $quizId)->join("users", "student_quizs.student_id", "users.id")
+        $subjects = Subject::all();
+        $subjectId = isset($_GET['subject_id']) ? $_GET['subject_id'] : $subjects[0]->id;
+        $quizs = Quiz::where('subject_id', $subjectId)->get();
+        $quizId = isset($_GET['quiz_id']) ? $_GET['quiz_id'] : $quizs[0]->id;
+        $studentQuiz = StudentQuiz::where('quiz_id', $quizId)
+        ->join("users", "student_quizs.student_id", "users.id")
         ->select("student_quizs.*", "users.name as us_name")
         ->orderBy("student_quizs.id", "desc")
         ->limit(10)
@@ -30,8 +33,10 @@ class StudentQuizController
 
         return view('student_quiz.index', [
             'studentQuiz' => $studentQuiz,
-            'quiz' => $quiz,
+            'quiz' => $quizs,
             'quizId' => $quizId,
+            'subjects' => $subjects,
+            'subjectId' => $subjectId,
             'pages' => $pages,
             'from' => $from,
         ]);

@@ -1,4 +1,5 @@
 @extends('layouts.main')
+@section('title', 'Thêm đáp án')
 @section('content')
     <form action="{{ BASE_URL }}answer/luu-tao-moi" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="question_id" value="{{ $_GET['question_id'] }}"/>

@@ -4,8 +4,17 @@
 <form id="search_form" action="" method="get">
                         <div class="row">
                             <div class="col-4">
-                                <div class="form-group">
+                            <div class="form-group">
                                     <label for="">Môn học</label>
+                                    <select id="select_subject" name="subject_id" class="form-control">
+                                        @foreach ($subjects as $item)
+                                            <option {{$item->id == $subjectId ? "selected" : "" }} value="{{$item->id}}">{{$item->name}}</option>
+                                        
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="">Quiz</label>
                                     <select id="select_quiz" name="quiz_id" class="form-control">
                                         @foreach ($quiz as $item)
                                             <option {{$item->id == $quizId ? "selected" : "" }} value="{{$item->id}}">{{$item->name}}</option>
@@ -22,7 +31,6 @@
                     <th>Mã sinh viên</th>
                     <th>Tên sinh viên</th>
                     <th>Điểm</th>
-                    <th>Môn học</th>
                     <th></th>
                 </tr>
             </thead>
@@ -60,6 +68,11 @@
     </nav>
 @endsection
 @section('page-script')
+<script>
+    $('#select_subject').on('change', function(){
+        $('form#search_form').trigger('submit');
+    })
+</script>
 <script>
     $('#select_quiz').on('change', function(){
         $('form#search_form').trigger('submit');
